@@ -5,6 +5,7 @@ import 'package:duds/Components/loading_screen.dart';
 import 'package:duds/constants.dart';
 import 'package:flutter/material.dart';
 
+import 'Components/payment_screen.dart';
 import 'Components/testing_screen.dart';
 
 void main() {
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/welcome': (context) => const OnboardingFirstScreen(),
         '/welcome2': (context) => const OnboardingSecondScreen(),
         '/fillprofile': (context) => FillProfileScreen(),
+        '/payment': (context) => PaymentMethodPage(),
         '/testing': (context) => TestingScreen(),
       },
     );
