@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'Components/payment_screen.dart';
 import 'Components/testing_screen.dart';
+import 'Components/profile_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: kPrimaryLightColor
       ),
-      initialRoute: '/welcome2',
+      initialRoute: '/profile',
       routes: {
         '/': (context) => const LoadingScreen(),
         '/welcome': (context) => const OnboardingFirstScreen(),
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         '/fillprofile': (context) => FillProfileScreen(),
         '/payment': (context) => PaymentMethodPage(),
         '/testing': (context) => TestingScreen(),
+        '/profile': (context) => UploadProfilePage(),
       },
     );
   }
