@@ -8,16 +8,19 @@ class PaymentMethodPage extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
-        title: Text(
-          'Payment Method',
-          style: TextStyle(
-            fontSize: 35,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
+        title: Transform.translate(
+          offset: Offset(0, 5), // Menyesuaikan offset secara vertikal
+          child: Text(
+            'Payment Method',
+            style: TextStyle(
+              fontSize: 35,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
           ),
         ),
       ),
-      backgroundColor: Colors.transparent, // Mengatur latar belakang Scaffold menjadi transparan
+      backgroundColor: Colors.transparent,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
