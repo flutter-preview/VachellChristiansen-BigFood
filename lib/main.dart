@@ -1,9 +1,11 @@
 import 'package:duds/Components/onboarding_second_screen.dart';
-import 'package:duds/Components/testing_screen.dart';
+import 'package:duds/Components/fill_screen.dart';
 import 'package:duds/Components/onboarding_first_screen.dart';
 import 'package:duds/Components/loading_screen.dart';
 import 'package:duds/constants.dart';
 import 'package:flutter/material.dart';
+
+import 'Components/testing_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,9 +27,10 @@ class MyApp extends StatelessWidget {
       initialRoute: '/welcome2',
       routes: {
         '/': (context) => const LoadingScreen(),
-        '/welcome': (coooooooooooooooooooooooooooooooooooooooooooontext) => const OnboardingFirstScreen(),
+        '/welcome': (context) => const OnboardingFirstScreen(),
         '/welcome2': (context) => const OnboardingSecondScreen(),
-        '/testing': (context) => const TestingScreen(),
+        '/fillprofile': (context) => FillProfileScreen(),
+        '/testing': (context) => TestingScreen(),
       },
     );
   }

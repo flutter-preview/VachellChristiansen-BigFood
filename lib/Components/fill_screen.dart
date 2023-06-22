@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class TestingScreen extends StatefulWidget {
-  TestingScreen({Key? key}) : super(key: key);
+class FillProfileScreen extends StatefulWidget {
+  FillProfileScreen({Key? key}) : super(key: key);
 
   @override
   _TestingScreenState createState() => _TestingScreenState();
 }
 
-class _TestingScreenState extends State<TestingScreen> {
+class _TestingScreenState extends State<FillProfileScreen> {
   String fullName = '';
   DateTime? selectedDate;
   String mobileNumber = '';

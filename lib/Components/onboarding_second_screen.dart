@@ -76,7 +76,7 @@ class OnboardingSecondScreen extends StatelessWidget {
                                         textStyle: const TextStyle(fontSize: 20),
                                       ),
                                       onPressed: () {
-                                        Navigator.pushNamed(context, '/welcome');
+                                        Navigator.pushNamed(context, '/welcome2');
                                       },
                                       child: const Text('Next'),
                                     ),
