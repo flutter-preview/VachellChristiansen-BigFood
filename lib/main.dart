@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: kPrimaryLightColor
       ),
-      initialRoute: '/profile',
+      initialRoute: '/welcome2',
       routes: {
         '/': (context) => const LoadingScreen(),
         '/welcome': (context) => const OnboardingFirstScreen(),
