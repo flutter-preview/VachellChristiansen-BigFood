@@ -109,7 +109,7 @@ class _TestingScreenState extends State<FillProfileScreen> {
                 print('Mobile Number: $mobileNumber');
               },
               style: ElevatedButton.styleFrom(
-                primary: Color.fromARGB(255, 255, 30, 0),
+                primary: Color(int.parse('FF6440', radix: 16)).withOpacity(1.0),
                 padding: EdgeInsets.symmetric(vertical: 16.0),
               ),
               child: Text(
