@@ -91,7 +91,7 @@ class _TestingScreenState extends State<TestingScreen> {
               decoration: InputDecoration(
                 labelText: 'Mobile Number',
                 border: OutlineInputBorder(),
-                prefixIcon: Image.asset('assets/images/phone_icon.png'),
+                prefixIcon: Image.asset('assets/phone_icon.png'),
               ),
               onChanged: (value) {
                 setState(() {

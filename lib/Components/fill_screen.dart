@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 
-class FillProfileScreen extends StatefulWidget {
-  FillProfileScreen({Key? key}) : super(key: key);
-
-  @override
-  _TestingScreenState createState() => _TestingScreenState();
-}
-
-class _TestingScreenState extends State<FillProfileScreen> {
+class FillProfileScreen extends StatelessWidget {
   String fullName = '';
   DateTime? selectedDate;
   String mobileNumber = '';
@@ -20,9 +13,7 @@ class _TestingScreenState extends State<FillProfileScreen> {
       lastDate: DateTime(2100),
     );
     if (picked != null) {
-      setState(() {
-        selectedDate = picked;
-      });
+      selectedDate = picked;
     }
   }
 
@@ -61,9 +52,7 @@ class _TestingScreenState extends State<FillProfileScreen> {
                 prefixIcon: Icon(Icons.person),
               ),
               onChanged: (value) {
-                setState(() {
-                  fullName = value;
-                });
+                fullName = value;
               },
             ),
             SizedBox(height: 10.0),
@@ -91,12 +80,18 @@ class _TestingScreenState extends State<FillProfileScreen> {
               decoration: InputDecoration(
                 labelText: 'Mobile Number',
                 border: OutlineInputBorder(),
-                prefixIcon: Image.asset('assets/phone_icon.png'),
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    'assets/phone_icon.png',
+                    height: 15.0, // Adjust the height as per your requirement
+                    width: 15.0, // Adjust the width as per your requirement
+                    fit: BoxFit.contain,
+                  ),
+                ),
               ),
               onChanged: (value) {
-                setState(() {
-                  mobileNumber = value;
-                });
+                mobileNumber = value;
               },
             ),
             SizedBox(height: 20.0),
