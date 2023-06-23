@@ -1,4 +1,5 @@
 import 'package:duds/Components/onboarding_two_screen.dart';
+import 'package:duds/Components/resetpass_screen.dart';
 import 'package:duds/Components/testing_screen.dart';
 import 'package:duds/Components/loading_screen.dart';
 import 'package:duds/constants.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         '/verification': (context) =>  VerificationScreen(),
         '/profile': (context) =>  UploadProfilePage(),
         '/viamethod': (context) =>  ViaMethodScreen(),
+        '/resetpass' : (context) => ResetPasswordPage()
       },
     );
   }
