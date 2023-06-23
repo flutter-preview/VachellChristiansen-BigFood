@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class FillProfileScreen extends StatelessWidget {
+class SignUpProcess extends StatelessWidget {
   String fullName = '';
   DateTime? selectedDate;
   String mobileNumber = '';
