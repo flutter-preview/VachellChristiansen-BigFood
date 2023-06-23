@@ -10,6 +10,7 @@ import 'Components/uploadphoto_screen.dart';
 import 'Components/signup_process_screen.dart';
 import 'Components/signup_screen.dart';
 import 'Components/verificationcode_screen.dart';
+import 'Components/viamethod_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         '/signup': (context) =>  SignUpScreen(),
         '/verification': (context) =>  VerificationScreen(),
         '/profile': (context) =>  UploadProfilePage(),
+        '/viamethod': (context) =>  ViaMethodScreen(),
       },
     );
   }
