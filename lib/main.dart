@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'Components/login_screen.dart';
 import 'Components/onboarding_one_screen.dart';
 import 'Components/payment_screen.dart';
+import 'Components/uploadphoto_screen.dart';
+import 'Components/signup_process_screen.dart';
 import 'Components/signup_screen.dart';
 import 'Components/verificationcode_screen.dart';
 
@@ -33,9 +35,11 @@ class MyApp extends StatelessWidget {
         '/welcome2': (context) => const OnboardingTwoScreen(),
         '/testing': (context) =>  TestingScreen(),
         '/payment': (context) =>  const PaymentMethodPage(),
+        '/signup1': (context) =>  SignUpProcess(),
         '/login': (context) =>  LoginScreen(),
         '/signup': (context) =>  SignUpScreen(),
         '/verification': (context) =>  VerificationScreen(),
+        '/profile': (context) =>  UploadProfilePage(),
       },
     );
   }
