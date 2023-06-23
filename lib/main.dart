@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         '/welcome2': (context) => const OnboardingTwoScreen(),
         '/testing': (context) =>  TestingScreen(),
         '/payment': (context) =>  const PaymentMethodPage(),
-        '/login': (context) =>  const LoginScreen(),
+        '/login': (context) =>  LoginScreen(),
       },
     );
   }
