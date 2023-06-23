@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'Components/login_screen.dart';
 import 'Components/onboarding_one_screen.dart';
 import 'Components/payment_screen.dart';
+import 'Components/signup_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         '/testing': (context) =>  TestingScreen(),
         '/payment': (context) =>  const PaymentMethodPage(),
         '/login': (context) =>  LoginScreen(),
+        '/signup': (context) =>  SignUpScreen(),
       },
     );
   }
