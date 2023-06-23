@@ -7,6 +7,7 @@ import 'Components/login_screen.dart';
 import 'Components/onboarding_one_screen.dart';
 import 'Components/payment_screen.dart';
 import 'Components/signup_screen.dart';
+import 'Components/verificationcode_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         '/payment': (context) =>  const PaymentMethodPage(),
         '/login': (context) =>  LoginScreen(),
         '/signup': (context) =>  SignUpScreen(),
+        '/verification': (context) =>  VerificationScreen(),
       },
     );
   }
