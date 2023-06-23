@@ -1,5 +1,5 @@
 import 'package:duds/Components/onboarding_second_screen.dart';
-import 'package:duds/Components/testing_screen.dart';
+// import 'package:duds/Components/testing_screen.dart';
 import 'package:duds/Components/onboarding_first_screen.dart';
 import 'package:duds/Components/loading_screen.dart';
 import 'package:duds/constants.dart';
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const LoadingScreen(),
         '/welcome': (context) => const OnboardingFirstScreen(),
         '/welcome2': (context) => const OnboardingSecondScreen(),
-        '/testing': (context) => const TestingScreen(),
+        // '/testing': (context) => const TestingScreen(),
       },
     );
   }
