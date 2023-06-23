@@ -1,8 +1,9 @@
+import 'package:duds/Components/onboarding_one_screen.dart';
 import 'package:duds/constants.dart';
 import 'package:flutter/material.dart';
 
-class OnboardingSecondScreen extends StatelessWidget {
-  const OnboardingSecondScreen({super.key});
+class OnboardingTwoScreen extends StatelessWidget {
+  const OnboardingTwoScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +77,7 @@ class OnboardingSecondScreen extends StatelessWidget {
                                         textStyle: const TextStyle(fontSize: 20),
                                       ),
                                       onPressed: () {
-                                        Navigator.pushNamed(context, '/welcome');
+                                        Navigator.of(context).push(_createRoute());
                                       },
                                       child: const Text('Next'),
                                     ),
@@ -97,4 +98,23 @@ class OnboardingSecondScreen extends StatelessWidget {
       )
     );
   }
+}
+
+
+Route _createRoute() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => const OnboardingOneScreen(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(-1.0, 0.0);
+      const end = Offset.zero;
+      const curve = Curves.ease;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
 }
