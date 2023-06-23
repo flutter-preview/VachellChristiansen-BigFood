@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ViaMethodScreen extends StatefulWidget {
-  @override
-  _LoginScreenState createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<ViaMethodScreen> {
-  bool _showPassword = false;
-
+class ViaMethodScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,29 +55,69 @@ class _LoginScreenState extends State<ViaMethodScreen> {
                           ),
                           SizedBox(height: 15.0),
                           Text(
-                            textAlign: TextAlign.center,
                             'Select which contact details \nshould we use to reset your \npassword',
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 15.0,
                             ),
                           ),
                           SizedBox(height: 25.0),
                           BoxWrapper(
-                            child: BoxTextField(
-                              hintText: 'Via sms',
-                              prefixIcon: Icon(Icons.sms),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  // Logic for SMS button
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary: Color.fromARGB(255, 192, 192, 192),
+                                  minimumSize: Size(double.infinity, 48.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.sms),
+                                      SizedBox(width: 10.0),
+                                      Text(
+                                        'Via SMS',
+                                        style: TextStyle(fontSize: 16.0),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                           SizedBox(height: 10.0),
                           BoxWrapper(
-                            child: BoxTextField(
-                              hintText: 'Via Email',
-                              prefixIcon: Icon(Icons.email),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  // Logic for Email button
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary: Color.fromARGB(255, 192, 192, 192),
+                                  minimumSize: Size(double.infinity, 48.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.email),
+                                      SizedBox(width: 10.0),
+                                      Text(
+                                        'Via Email',
+                                        style: TextStyle(fontSize: 16.0),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                          SizedBox(height: 10.0),
-                          SizedBox(height: 10.0),
-                          SizedBox(height: 20.0),
+                          SizedBox(height: 25.0),
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
@@ -109,7 +142,6 @@ class _LoginScreenState extends State<ViaMethodScreen> {
                     ),
                   ),
                   SizedBox(height: 30.0),
-                  
                 ],
               ),
             ),
@@ -155,35 +187,6 @@ class BoxWrapper extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16.0),
       margin: EdgeInsets.symmetric(vertical: 8.0),
       child: child,
-    );
-  }
-}
-
-class BoxTextField extends StatelessWidget {
-  final String hintText;
-  final bool obscureText;
-  final Icon? prefixIcon;
-
-  const BoxTextField({
-    Key? key,
-    required this.hintText,
-    this.obscureText = false,
-    this.prefixIcon,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      decoration: InputDecoration(
-        hintText: hintText,
-        contentPadding: EdgeInsets.symmetric(vertical: 16.0),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        prefixIcon: prefixIcon,
-      ),
-      obscureText: obscureText,
     );
   }
 }
