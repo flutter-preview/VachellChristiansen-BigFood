@@ -1,3 +1,4 @@
+import 'package:duds/constants.dart';
 import 'package:flutter/material.dart';
 
 class LoadingScreen extends StatefulWidget {
@@ -36,9 +37,10 @@ class _LoadingScreenState extends State<LoadingScreen> with SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kPrimaryLightColor,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/welcome');
+          Navigator.pushNamed(context, '/onboarding_one');
         },
         child: const Icon(Icons.home),
       ),

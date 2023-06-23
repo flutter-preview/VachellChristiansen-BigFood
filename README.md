@@ -1,4 +1,4 @@
-# duds
+# BigFood UI
 
 A new Flutter project.
 

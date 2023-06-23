@@ -1,13 +1,9 @@
-import 'package:duds/Components/onboarding_second_screen.dart';
-import 'package:duds/Components/signup_process_screen.dart';
-import 'package:duds/Components/onboarding_first_screen.dart';
+import 'package:duds/Components/onboarding_two_screen.dart';
+import 'package:duds/Components/testing_screen.dart';
 import 'package:duds/Components/loading_screen.dart';
 import 'package:duds/constants.dart';
 import 'package:flutter/material.dart';
-
-import 'Components/payment_screen.dart';
-import 'Components/testing_screen.dart';
-import 'Components/profile_screen.dart';
+import 'Components/onboarding_one_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,17 +20,14 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Auth',
       theme: ThemeData(
         primaryColor: kPrimaryColor,
-        scaffoldBackgroundColor: kPrimaryLightColor
+        scaffoldBackgroundColor: Colors.white
       ),
-      initialRoute: '/welcome2',
+      initialRoute: '/onboarding_one',
       routes: {
         '/': (context) => const LoadingScreen(),
-        '/welcome': (context) => const OnboardingFirstScreen(),
-        '/welcome2': (context) => const OnboardingSecondScreen(),
-        '/signupprofile': (context) => SignUpProcess(),
-        '/payment': (context) => PaymentMethodPage(),
-        '/testing': (context) => TestingScreen(),
-        '/profile': (context) => UploadProfilePage(),
+        '/welcome': (context) => const OnboardingOneScreen(),
+        '/welcome2': (context) => const OnboardingTwoScreen(),
+        '/testing': (context) =>  TestingScreen(),
       },
     );
   }
