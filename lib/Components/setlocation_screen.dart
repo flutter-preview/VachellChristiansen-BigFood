@@ -86,7 +86,7 @@ class SetLocationPage extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Navigate to the next page
+                    Navigator.pushNamed(context, '/signupsuccesspage');// Navigate to the next page
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Color(int.parse('FF6440', radix: 16)).withOpacity(1.0),

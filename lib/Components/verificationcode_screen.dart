@@ -127,7 +127,7 @@ class _LoginScreenState extends State<VerificationScreen> {
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () {
-                                // Tambahkan logika untuk tombol login di sini
+                                Navigator.pushNamed(context, '/viamethod');// Tambahkan logika untuk tombol login di sini
                               },
                               child: Text(
                                 'Continue',

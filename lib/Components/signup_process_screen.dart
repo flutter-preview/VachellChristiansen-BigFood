@@ -98,7 +98,7 @@ class SignUpProcess extends StatelessWidget {
             Spacer(),
             ElevatedButton(
               onPressed: () {
-                // Do something with the form data
+                Navigator.pushNamed(context, '/payment');// Do something with the form data
                 print('Full Name: $fullName');
                 print('Date of Birth: $selectedDate');
                 print('Mobile Number: $mobileNumber');

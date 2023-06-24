@@ -122,7 +122,7 @@ class ViaMethodScreen extends StatelessWidget {
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () {
-                                // Tambahkan logika untuk tombol login di sini
+                                Navigator.pushNamed(context, '/login');// Tambahkan logika untuk tombol login di sini
                               },
                               child: Text(
                                 'Continue',

@@ -125,7 +125,7 @@ class _LoginScreenState extends State<ResetPasswordPage> {
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () {
-                                // Tambahkan logika untuk tombol login di sini
+                                Navigator.pushNamed(context, '/verification');// Tambahkan logika untuk tombol login di sini
                               },
                               child: Text(
                                 'Continue',

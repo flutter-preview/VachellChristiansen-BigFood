@@ -13,6 +13,7 @@ class SuccessNotif extends StatelessWidget {
         primarySwatch: Colors.orange,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
         body: Center(
@@ -57,7 +58,7 @@ class SuccessNotif extends StatelessWidget {
                     padding: EdgeInsets.only(bottom: 16.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        // Tambahkan logika untuk tombol login di sini
+                        Navigator.pushNamed(context, '/successnotif');// Tambahkan logika untuk tombol login di sini
                       },
                       child: Text(
                         'Login',

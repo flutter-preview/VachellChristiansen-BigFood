@@ -13,6 +13,7 @@ class SignUpSuccessPage extends StatelessWidget {
         primarySwatch: Colors.orange,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
         body: Center(
@@ -60,7 +61,7 @@ class SignUpSuccessPage extends StatelessWidget {
                         // Tambahkan logika untuk tombol login di sini
                       },
                       child: Text(
-                        'Your Profile Is Ready To Use ',
+                        'Try Order',
                         style: TextStyle(color: Colors.white),
                       ),
                       style: ElevatedButton.styleFrom(

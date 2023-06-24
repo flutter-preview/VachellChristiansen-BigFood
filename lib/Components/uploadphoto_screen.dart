@@ -88,7 +88,7 @@ class UploadProfilePage extends StatelessWidget {
               SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () {
-                  // Navigate to the next page
+                  Navigator.pushNamed(context, '/setlocationpage');// Navigate to the next page
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Color(int.parse('FF6440', radix: 16)).withOpacity(1.0),
