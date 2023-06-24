@@ -41,7 +41,7 @@ class SignUpSuccessPage extends StatelessWidget {
                       Align(
                         alignment: Alignment.center,
                         child: Text(
-                          'Password Reset Successful',
+                          'Your Profile Is Ready To use',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.black,
@@ -60,7 +60,7 @@ class SignUpSuccessPage extends StatelessWidget {
                         // Tambahkan logika untuk tombol login di sini
                       },
                       child: Text(
-                        'Login',
+                        'Your Profile Is Ready To Use ',
                         style: TextStyle(color: Colors.white),
                       ),
                       style: ElevatedButton.styleFrom(
