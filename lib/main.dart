@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'Components/login_screen.dart';
 import 'Components/onboarding_one_screen.dart';
 import 'Components/payment_screen.dart';
+import 'Components/success_notification.dart';
 import 'Components/uploadphoto_screen.dart';
 import 'Components/signup_process_screen.dart';
 import 'Components/signup_screen.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white
       ),
-      initialRoute: '/onboarding_one',
+      initialRoute: '/welcome',
       routes: {
         '/': (context) => const LoadingScreen(),
         '/welcome': (context) => const OnboardingOneScreen(),
@@ -43,7 +44,8 @@ class MyApp extends StatelessWidget {
         '/verification': (context) =>  VerificationScreen(),
         '/profile': (context) =>  UploadProfilePage(),
         '/viamethod': (context) =>  ViaMethodScreen(),
-        '/resetpass' : (context) => ResetPasswordPage()
+        '/resetpass' : (context) => ResetPasswordPage(),
+        '/successnotif' : (context) => SuccessNotif()
       },
     );
   }
