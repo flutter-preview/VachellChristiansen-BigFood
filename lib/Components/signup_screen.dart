@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<SignUpScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   bool _showPassword = false;
+  bool _showConfirmPassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -103,18 +104,19 @@ class _LoginScreenState extends State<SignUpScreen> {
                               children: [
                                 BoxTextField(
                                   hintText: 'Confirm Password',
-                                  obscureText: !_showPassword,
+                                  obscureText: !_showConfirmPassword,
                                   prefixIcon: Icon(Icons.lock),
                                 ),
                                 IconButton(
                                   icon: Icon(
-                                    _showPassword
+                                    _showConfirmPassword
                                         ? Icons.visibility
                                         : Icons.visibility_off,
                                   ),
                                   onPressed: () {
                                     setState(() {
-                                      _showPassword = !_showPassword;
+                                      _showConfirmPassword =
+                                          !_showConfirmPassword;
                                     });
                                   },
                                 ),
@@ -126,7 +128,8 @@ class _LoginScreenState extends State<SignUpScreen> {
                             alignment: Alignment.centerRight,
                             child: GestureDetector(
                               onTap: () {
-                                Navigator.pushNamed(context, '/viamethod');// Tambahkan logika untuk mengklik teks "Forgot Password" di sini
+                                Navigator.pushNamed(
+                                    context, '/viamethod'); // Tambahkan logika untuk mengklik teks "Forgot Password" di sini
                               },
                               child: Text(
                                 'Forget Password?',
@@ -142,7 +145,8 @@ class _LoginScreenState extends State<SignUpScreen> {
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/signup1');// Tambahkan logika untuk tombol login di sini
+                                Navigator.pushNamed(
+                                    context, '/signup1'); // Tambahkan logika untuk tombol login di sini
                               },
                               child: Text(
                                 'Create Account',
@@ -192,14 +196,16 @@ class _LoginScreenState extends State<SignUpScreen> {
                       SizedBox(height: 10.0),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/');// Tambahkan logika untuk mengklik teks Register di sini
+                          Navigator.pushNamed(context,
+                              '/'); // Tambahkan logika untuk mengklik teks Register di sini
                         },
                         child: Text(
                           'Login',
                           style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.bold,
-                            color: Color(int.parse('FF6440', radix: 16)).withOpacity(1.0),
+                            color: Color(int.parse('FF6440', radix: 16))
+                                .withOpacity(1.0),
                           ),
                         ),
                       ),
