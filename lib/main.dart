@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'Components/login_screen.dart';
 import 'Components/onboarding_one_screen.dart';
 import 'Components/payment_screen.dart';
+import 'Components/setlocation_screen.dart';
 import 'Components/signupsuccess_screen.dart';
 import 'Components/successnotification_screen.dart';
 import 'Components/uploadphoto_screen.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         '/resetpass' : (context) => ResetPasswordPage(),
         '/successnotif' : (context) => SuccessNotif(),
         '/signupsuccesspage' : (context) => SignUpSuccessPage(),
+        '/setlocationpage' : (context) => SetLocationPage(),
       },
     );
   }
