@@ -47,10 +47,9 @@ class SetLocationPage extends StatelessWidget {
                       strokeWidth: 1,
                       dashPattern: [5, 5],
                       child: Container(
-                        width: 150.0,
                         height: 60.0,
                         child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center, // Ubah crossAxisAlignment menjadi center
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 10.0),
@@ -60,15 +59,18 @@ class SetLocationPage extends StatelessWidget {
                                 color: Colors.orange,
                               ),
                             ),
-                            Text(
-                      'Set Your Location',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Color(int.parse('FF6440', radix: 16)).withOpacity(1.0),
-                      ),
-                    ),
+                            SizedBox(width: 10.0),
+                            Expanded(
+                              child: Text(
+                                'Set Your Location',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(int.parse('FF6440', radix: 16)).withOpacity(1.0),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -81,7 +83,7 @@ class SetLocationPage extends StatelessWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: SizedBox(
-                width: double.infinity, // Membuat tombol memenuhi lebar layar
+                width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
                     // Navigate to the next page
