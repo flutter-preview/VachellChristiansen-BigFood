@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(SuccessNotif());
+  runApp(SignUpSuccessPage());
 }
 
-class SuccessNotif extends StatelessWidget {
+class SignUpSuccessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,29 +21,36 @@ class SuccessNotif extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Congrats!',
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: Colors.orange,
-                      fontWeight: FontWeight.bold,
-                    ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Congrats!',
+                          style: TextStyle(
+                            fontSize: 24,
+                            color: Color(int.parse('FF6440', radix: 16))
+                                        .withOpacity(1.0),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Password Reset Successful',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(height: 16),
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Password Reset Successful',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                Spacer(),
                 SizedBox(
                   width: double.infinity,
                   child: Padding(
@@ -57,8 +64,7 @@ class SuccessNotif extends StatelessWidget {
                         style: TextStyle(color: Colors.white),
                       ),
                       style: ElevatedButton.styleFrom(
-                        primary: Color(int.parse('FF6440', radix: 16))
-                            .withOpacity(1.0),
+                        primary: Color(int.parse('FF6440', radix: 16)).withOpacity(1.0),
                         minimumSize: Size(double.infinity, 48.0),
                       ),
                     ),

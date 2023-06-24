@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'Components/login_screen.dart';
 import 'Components/onboarding_one_screen.dart';
 import 'Components/payment_screen.dart';
-import 'Components/success_notification.dart';
+import 'Components/signupsuccess_screen.dart';
+import 'Components/successnotification_screen.dart';
 import 'Components/uploadphoto_screen.dart';
 import 'Components/signup_process_screen.dart';
 import 'Components/signup_screen.dart';
@@ -45,7 +46,8 @@ class MyApp extends StatelessWidget {
         '/profile': (context) =>  UploadProfilePage(),
         '/viamethod': (context) =>  ViaMethodScreen(),
         '/resetpass' : (context) => ResetPasswordPage(),
-        '/successnotif' : (context) => SuccessNotif()
+        '/successnotif' : (context) => SuccessNotif(),
+        '/signupsuccesspage' : (context) => SignUpSuccessPage(),
       },
     );
   }
