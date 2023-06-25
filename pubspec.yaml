@@ -69,6 +69,37 @@ flutter:
     - assets/background.png
     - assets/facebookicon.png
     - assets/googleicon.jpg
+    - assets/beefBurger.png
+    - assets/BigFood.png    
+    - assets/burger.png
+    - assets/cancel-icon.png
+    - assets/card.png
+    - assets/cash.png
+    - assets/congrats.png
+    - assets/creamyBiscuit.png
+    - assets/cupCake.png
+    - assets/end.png
+    - assets/garlicSoup.png
+    - assets/location.png
+    - assets/locationBlack.png
+    - assets/message.png
+    - assets/missoSoup.png
+    - assets/mushroomSoup.png
+    - assets/pizzaRoll.png
+    - assets/rollParatha.png
+    - assets/sandwich.png
+    - assets/specialDeal1.png
+    - assets/specialDeal2.png
+    - assets/starEmpty.png
+    - assets/starFill.png
+    - assets/third.png
+    - assets/tomatoSoup.png
+    - assets/topUp.png
+    - assets/vegetable.png
+    - assets/zingerBurger.png
+    - assets/carrotSoup.png
+    - assets/speaker.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
