@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
+class VerificationScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<VerificationScreen> {
   bool _showPassword = false;
+  final TextEditingController _otpController1 = TextEditingController();
+  final TextEditingController _otpController2 = TextEditingController();
+  final TextEditingController _otpController3 = TextEditingController();
+  final TextEditingController _otpController4 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,136 +51,100 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Color.fromARGB(255, 255, 255, 255),
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  SizedBox(height: 15.0),
                   CardBox(
                     child: Container(
                       width: 300.0, // Ubah lebar CardBox sesuai kebutuhan
                       child: Column(
                         children: [
+                          SizedBox(height: 20.0),
                           Text(
-                            'Login',
+                            'Enter 4 digit \nverification code',
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 25.0,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 25.0),
-                          BoxWrapper(
-                            child: BoxTextField(
-                              hintText: 'Email',
-                              prefixIcon: Icon(Icons.email),
+                          SizedBox(height: 20.0),
+                          Text(
+                            'Code send to +6282045****. This \ncode will expire in 01:30',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey,
                             ),
                           ),
                           SizedBox(height: 10.0),
-                          BoxWrapper(
-                            child: Stack(
-                              alignment: Alignment.centerRight,
-                              children: [
-                                BoxTextField(
-                                  hintText: 'Password',
-                                  obscureText: !_showPassword,
-                                  prefixIcon: Icon(Icons.lock),
-                                ),
-                                IconButton(
-                                  icon: Icon(
-                                    _showPassword
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Expanded(
+                                child: BoxWrapper(
+                                  child: BoxTextField(
+                                    hintText: '',
+                                    obscureText: true,
+                                    controller: _otpController1,
+                                    maxLength: 1,
                                   ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _showPassword = !_showPassword;
-                                    });
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: 10.0),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(context, '/viamethod');// Tambahkan logika untuk mengklik teks "Forgot Password" di sini
-                              },
-                              child: Text(
-                                'Forget Password?',
-                                style: TextStyle(
-                                  fontSize: 14.0,
-                                  color: Colors.grey,
                                 ),
                               ),
-                            ),
+                              Expanded(
+                                child: BoxWrapper(
+                                  child: BoxTextField(
+                                    hintText: '',
+                                    obscureText: true,
+                                    controller: _otpController2,
+                                    maxLength: 1,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: BoxWrapper(
+                                  child: BoxTextField(
+                                    hintText: '',
+                                    obscureText: true,
+                                    controller: _otpController3,
+                                    maxLength: 1,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: BoxWrapper(
+                                  child: BoxTextField(
+                                    hintText: '',
+                                    obscureText: true,
+                                    controller: _otpController4,
+                                    maxLength: 1,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          SizedBox(height: 20.0),
+                          SizedBox(height: 30.0),
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/verification');
-                                // Tambahkan logika untuk tombol login di sini
+                                Navigator.pushNamed(context, '/viamethod');// Tambahkan logika untuk tombol login di sini
                               },
                               child: Text(
-                                'Login',
+                                'Continue',
                                 style: TextStyle(color: Colors.white),
                               ),
                               style: ElevatedButton.styleFrom(
-                                primary:
-                                    Color(int.parse('FF6440', radix: 16))
-                                        .withOpacity(1.0),
+                                primary: Color(int.parse('FF6440', radix: 16)).withOpacity(1.0),
                                 minimumSize: Size(double.infinity, 48.0),
                               ),
                             ),
                           ),
                           SizedBox(height: 20.0),
-                          Text(
-                            'or',
-                            style: TextStyle(fontSize: 16.0),
-                          ),
-                          SizedBox(height: 20.0),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CircleAvatar(
-                                backgroundColor: Colors.transparent,
-                                backgroundImage:
-                                    AssetImage('assets/facebookicon.png'),
-                              ),
-                              SizedBox(width: 10.0),
-                              CircleAvatar(
-                                backgroundColor: Colors.transparent,
-                                backgroundImage:
-                                    AssetImage('assets/googleicon.jpg'),
-                              ),
-                            ],
-                          ),
                         ],
                       ),
                     ),
                   ),
                   SizedBox(height: 30.0),
-                  Column(
-                    children: [
-                      Text(
-                        "Don't have an account?",
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      SizedBox(height: 10.0),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/signup');// Tambahkan logika untuk mengklik teks Register di sini
-                        },
-                        child: Text(
-                          'REGISTER',
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                            color: Color(int.parse('FF6440', radix: 16)).withOpacity(1.0),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
@@ -229,18 +197,22 @@ class BoxWrapper extends StatelessWidget {
 class BoxTextField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
-  final Icon? prefixIcon;
+  final TextEditingController? controller;
+  final int? maxLength;
 
   const BoxTextField({
     Key? key,
     required this.hintText,
     this.obscureText = false,
-    this.prefixIcon,
+    this.controller,
+    this.maxLength,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
+      keyboardType: TextInputType.number,
       decoration: InputDecoration(
         hintText: hintText,
         contentPadding: EdgeInsets.symmetric(vertical: 16.0),
@@ -248,15 +220,17 @@ class BoxTextField extends StatelessWidget {
           borderSide: BorderSide(color: Colors.grey),
           borderRadius: BorderRadius.circular(8.0),
         ),
-        prefixIcon: prefixIcon,
       ),
       obscureText: obscureText,
+      maxLength: maxLength,
+      textAlign: TextAlign.center,
+      style: TextStyle(fontSize: 20.0),
     );
   }
 }
 
 void main() {
   runApp(MaterialApp(
-    home: LoginScreen(),
+    home: VerificationScreen(),
   ));
 }

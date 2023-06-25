@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
+class ResetPasswordPage extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<ResetPasswordPage> {
   bool _showPassword = false;
 
   @override
@@ -54,20 +54,22 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Column(
                         children: [
                           Text(
-                            'Login',
+                            textAlign: TextAlign.center,
+                            'Reset your password \here',
                             style: TextStyle(
-                              fontSize: 25.0,
+                              fontSize: 28.0,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 25.0),
-                          BoxWrapper(
-                            child: BoxTextField(
-                              hintText: 'Email',
-                              prefixIcon: Icon(Icons.email),
+                          SizedBox(height: 15.0),
+                          Text(
+                            textAlign: TextAlign.center,
+                            'Enter your new password and then confirm new password',
+                            style: TextStyle(
+                              fontSize: 15.0,
                             ),
                           ),
-                          SizedBox(height: 10.0),
+                          SizedBox(height: 25.0),
                           BoxWrapper(
                             child: Stack(
                               alignment: Alignment.centerRight,
@@ -92,32 +94,41 @@ class _LoginScreenState extends State<LoginScreen> {
                               ],
                             ),
                           ),
-                          SizedBox(height: 10.0),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(context, '/viamethod');// Tambahkan logika untuk mengklik teks "Forgot Password" di sini
-                              },
-                              child: Text(
-                                'Forget Password?',
-                                style: TextStyle(
-                                  fontSize: 14.0,
-                                  color: Colors.grey,
+                          BoxWrapper(
+                            child: Stack(
+                              alignment: Alignment.centerRight,
+                              children: [
+                                BoxTextField(
+                                  hintText: 'Confirm Password',
+                                  obscureText: !_showPassword,
+                                  prefixIcon: Icon(Icons.lock),
                                 ),
-                              ),
+                                IconButton(
+                                  icon: Icon(
+                                    _showPassword
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _showPassword = !_showPassword;
+                                    });
+                                  },
+                                ),
+                              ],
                             ),
                           ),
+                          SizedBox(height: 10.0),
+                          SizedBox(height: 10.0),
                           SizedBox(height: 20.0),
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/verification');
-                                // Tambahkan logika untuk tombol login di sini
+                                Navigator.pushNamed(context, '/verification');// Tambahkan logika untuk tombol login di sini
                               },
                               child: Text(
-                                'Login',
+                                'Continue',
                                 style: TextStyle(color: Colors.white),
                               ),
                               style: ElevatedButton.styleFrom(
@@ -129,54 +140,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           SizedBox(height: 20.0),
-                          Text(
-                            'or',
-                            style: TextStyle(fontSize: 16.0),
-                          ),
-                          SizedBox(height: 20.0),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CircleAvatar(
-                                backgroundColor: Colors.transparent,
-                                backgroundImage:
-                                    AssetImage('assets/facebookicon.png'),
-                              ),
-                              SizedBox(width: 10.0),
-                              CircleAvatar(
-                                backgroundColor: Colors.transparent,
-                                backgroundImage:
-                                    AssetImage('assets/googleicon.jpg'),
-                              ),
-                            ],
-                          ),
                         ],
                       ),
                     ),
                   ),
                   SizedBox(height: 30.0),
-                  Column(
-                    children: [
-                      Text(
-                        "Don't have an account?",
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      SizedBox(height: 10.0),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/signup');// Tambahkan logika untuk mengklik teks Register di sini
-                        },
-                        child: Text(
-                          'REGISTER',
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                            color: Color(int.parse('FF6440', radix: 16)).withOpacity(1.0),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  
                 ],
               ),
             ),
@@ -257,6 +226,6 @@ class BoxTextField extends StatelessWidget {
 
 void main() {
   runApp(MaterialApp(
-    home: LoginScreen(),
+    home: ResetPasswordPage(),
   ));
 }

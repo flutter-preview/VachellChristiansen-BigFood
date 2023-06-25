@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   bool _showPassword = false;
+  bool _showConfirmPassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Column(
                         children: [
                           Text(
-                            'Login',
+                            'Sign Up',
                             style: TextStyle(
                               fontSize: 25.0,
                               fontWeight: FontWeight.bold,
@@ -63,11 +64,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(height: 25.0),
                           BoxWrapper(
                             child: BoxTextField(
+                              hintText: 'Name',
+                              prefixIcon: Icon(Icons.email),
+                            ),
+                          ),
+                          BoxWrapper(
+                            child: BoxTextField(
                               hintText: 'Email',
                               prefixIcon: Icon(Icons.email),
                             ),
                           ),
-                          SizedBox(height: 10.0),
                           BoxWrapper(
                             child: Stack(
                               alignment: Alignment.centerRight,
@@ -92,12 +98,38 @@ class _LoginScreenState extends State<LoginScreen> {
                               ],
                             ),
                           ),
+                          BoxWrapper(
+                            child: Stack(
+                              alignment: Alignment.centerRight,
+                              children: [
+                                BoxTextField(
+                                  hintText: 'Confirm Password',
+                                  obscureText: !_showConfirmPassword,
+                                  prefixIcon: Icon(Icons.lock),
+                                ),
+                                IconButton(
+                                  icon: Icon(
+                                    _showConfirmPassword
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _showConfirmPassword =
+                                          !_showConfirmPassword;
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
                           SizedBox(height: 10.0),
                           Align(
                             alignment: Alignment.centerRight,
                             child: GestureDetector(
                               onTap: () {
-                                Navigator.pushNamed(context, '/viamethod');// Tambahkan logika untuk mengklik teks "Forgot Password" di sini
+                                Navigator.pushNamed(
+                                    context, '/viamethod'); // Tambahkan logika untuk mengklik teks "Forgot Password" di sini
                               },
                               child: Text(
                                 'Forget Password?',
@@ -113,11 +145,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/verification');
-                                // Tambahkan logika untuk tombol login di sini
+                                Navigator.pushNamed(
+                                    context, '/signup1'); // Tambahkan logika untuk tombol login di sini
                               },
                               child: Text(
-                                'Login',
+                                'Create Account',
                                 style: TextStyle(color: Colors.white),
                               ),
                               style: ElevatedButton.styleFrom(
@@ -158,20 +190,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   Column(
                     children: [
                       Text(
-                        "Don't have an account?",
+                        "Already have an account?",
                         style: TextStyle(fontSize: 16.0),
                       ),
                       SizedBox(height: 10.0),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/signup');// Tambahkan logika untuk mengklik teks Register di sini
+                          Navigator.pushNamed(context,
+                              '/'); // Tambahkan logika untuk mengklik teks Register di sini
                         },
                         child: Text(
-                          'REGISTER',
+                          'Login',
                           style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.bold,
-                            color: Color(int.parse('FF6440', radix: 16)).withOpacity(1.0),
+                            color: Color(int.parse('FF6440', radix: 16))
+                                .withOpacity(1.0),
                           ),
                         ),
                       ),
@@ -257,6 +291,6 @@ class BoxTextField extends StatelessWidget {
 
 void main() {
   runApp(MaterialApp(
-    home: LoginScreen(),
+    home: SignUpScreen(),
   ));
 }
