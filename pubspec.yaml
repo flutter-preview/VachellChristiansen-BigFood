@@ -100,6 +100,18 @@ flutter:
     - assets/zingerBurger.png
     - assets/carrotSoup.png
     - assets/speaker.png
+    - assets/emailBlack.png
+    - assets/messageBlack.png
+    - assets/account.png
+    - assets/filter.png
+    - assets/home.png
+    - assets/icon-send.png
+    - assets/pattern.png
+    - assets/pencil.png
+    - assets/question.png
+    - assets/trash.png
+    - assets/trolley.png
+    - assets/search.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
