@@ -40,7 +40,7 @@ class _LoadingScreenState extends State<LoadingScreen> with SingleTickerProvider
       backgroundColor: kPrimaryLightColor,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/onboarding_one');
+          Navigator.pushNamed(context, '/welcome');
         },
         child: const Icon(Icons.home),
       ),

@@ -1,4 +1,5 @@
 import 'package:duds/Components/onboarding_two_screen.dart';
+import 'package:duds/Components/resetpass_screen.dart';
 import 'package:duds/Components/testing_screen.dart';
 import 'package:duds/Components/loading_screen.dart';
 import 'package:duds/constants.dart';
@@ -6,8 +7,14 @@ import 'package:flutter/material.dart';
 import 'Components/login_screen.dart';
 import 'Components/onboarding_one_screen.dart';
 import 'Components/payment_screen.dart';
+import 'Components/setlocation_screen.dart';
+import 'Components/signupsuccess_screen.dart';
+import 'Components/successnotification_screen.dart';
+import 'Components/uploadphoto_screen.dart';
+import 'Components/signup_process_screen.dart';
 import 'Components/signup_screen.dart';
 import 'Components/verificationcode_screen.dart';
+import 'Components/viamethod_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,16 +33,23 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white
       ),
-      initialRoute: '/onboarding_one',
+      initialRoute: '/welcome',
       routes: {
         '/': (context) => const LoadingScreen(),
         '/welcome': (context) => const OnboardingOneScreen(),
         '/welcome2': (context) => const OnboardingTwoScreen(),
         '/testing': (context) =>  TestingScreen(),
         '/payment': (context) =>  const PaymentMethodPage(),
+        '/signup1': (context) =>  SignUpProcess(),
         '/login': (context) =>  LoginScreen(),
         '/signup': (context) =>  SignUpScreen(),
         '/verification': (context) =>  VerificationScreen(),
+        '/profile': (context) =>  UploadProfilePage(),
+        '/viamethod': (context) =>  ViaMethodScreen(),
+        '/resetpass' : (context) => ResetPasswordPage(),
+        '/successnotif' : (context) => SuccessNotif(),
+        '/signupsuccesspage' : (context) => SignUpSuccessPage(),
+        '/setlocationpage' : (context) => SetLocationPage(),
       },
     );
   }

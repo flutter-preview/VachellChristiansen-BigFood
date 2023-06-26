@@ -78,6 +78,7 @@ class OnboardingTwoScreen extends StatelessWidget {
                                       ),
                                       onPressed: () {
                                         Navigator.of(context).push(_createRoute());
+                                        Navigator.pushNamed(context, '/login');
                                       },
                                       child: const Text('Next'),
                                     ),

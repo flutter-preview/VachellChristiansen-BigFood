@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             alignment: Alignment.centerRight,
                             child: GestureDetector(
                               onTap: () {
-                                // Tambahkan logika untuk mengklik teks "Forgot Password" di sini
+                                Navigator.pushNamed(context, '/viamethod');// Tambahkan logika untuk mengklik teks "Forgot Password" di sini
                               },
                               child: Text(
                                 'Forget Password?',
@@ -113,6 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () {
+                                Navigator.pushNamed(context, '/verification');
                                 // Tambahkan logika untuk tombol login di sini
                               },
                               child: Text(
@@ -163,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: 10.0),
                       GestureDetector(
                         onTap: () {
-                          // Tambahkan logika untuk mengklik teks Register di sini
+                          Navigator.pushNamed(context, '/signup');// Tambahkan logika untuk mengklik teks Register di sini
                         },
                         child: Text(
                           'REGISTER',

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-class SignUpScreen extends StatefulWidget {
+class ResetPasswordPage extends StatefulWidget {
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _LoginScreenState extends State<ResetPasswordPage> {
   bool _showPassword = false;
-  bool _showConfirmPassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -55,25 +54,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: Column(
                         children: [
                           Text(
-                            'Sign Up',
+                            textAlign: TextAlign.center,
+                            'Reset your password \here',
                             style: TextStyle(
-                              fontSize: 25.0,
+                              fontSize: 28.0,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
+                          SizedBox(height: 15.0),
+                          Text(
+                            textAlign: TextAlign.center,
+                            'Enter your new password and then confirm new password',
+                            style: TextStyle(
+                              fontSize: 15.0,
+                            ),
+                          ),
                           SizedBox(height: 25.0),
-                          BoxWrapper(
-                            child: BoxTextField(
-                              hintText: 'Name',
-                              prefixIcon: Icon(Icons.email),
-                            ),
-                          ),
-                          BoxWrapper(
-                            child: BoxTextField(
-                              hintText: 'Email',
-                              prefixIcon: Icon(Icons.email),
-                            ),
-                          ),
                           BoxWrapper(
                             child: Stack(
                               alignment: Alignment.centerRight,
@@ -104,19 +100,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               children: [
                                 BoxTextField(
                                   hintText: 'Confirm Password',
-                                  obscureText: !_showConfirmPassword,
+                                  obscureText: !_showPassword,
                                   prefixIcon: Icon(Icons.lock),
                                 ),
                                 IconButton(
                                   icon: Icon(
-                                    _showConfirmPassword
+                                    _showPassword
                                         ? Icons.visibility
                                         : Icons.visibility_off,
                                   ),
                                   onPressed: () {
                                     setState(() {
-                                      _showConfirmPassword =
-                                          !_showConfirmPassword;
+                                      _showPassword = !_showPassword;
                                     });
                                   },
                                 ),
@@ -124,32 +119,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ),
                           SizedBox(height: 10.0),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, '/viamethod'); // Tambahkan logika untuk mengklik teks "Forgot Password" di sini
-                              },
-                              child: Text(
-                                'Forget Password?',
-                                style: TextStyle(
-                                  fontSize: 14.0,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ),
-                          ),
+                          SizedBox(height: 10.0),
                           SizedBox(height: 20.0),
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.pushNamed(
-                                    context, '/signup1'); // Tambahkan logika untuk tombol login di sini
+                                Navigator.pushNamed(context, '/verification');// Tambahkan logika untuk tombol login di sini
                               },
                               child: Text(
-                                'Create Account',
+                                'Continue',
                                 style: TextStyle(color: Colors.white),
                               ),
                               style: ElevatedButton.styleFrom(
@@ -161,56 +140,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ),
                           SizedBox(height: 20.0),
-                          Text(
-                            'or',
-                            style: TextStyle(fontSize: 16.0),
-                          ),
-                          SizedBox(height: 20.0),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CircleAvatar(
-                                backgroundColor: Colors.transparent,
-                                backgroundImage:
-                                    AssetImage('assets/facebookicon.png'),
-                              ),
-                              SizedBox(width: 10.0),
-                              CircleAvatar(
-                                backgroundColor: Colors.transparent,
-                                backgroundImage:
-                                    AssetImage('assets/googleicon.jpg'),
-                              ),
-                            ],
-                          ),
                         ],
                       ),
                     ),
                   ),
                   SizedBox(height: 30.0),
-                  Column(
-                    children: [
-                      Text(
-                        "Already have an account?",
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      SizedBox(height: 10.0),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context,
-                              '/'); // Tambahkan logika untuk mengklik teks Register di sini
-                        },
-                        child: Text(
-                          'Login',
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                            color: Color(int.parse('FF6440', radix: 16))
-                                .withOpacity(1.0),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  
                 ],
               ),
             ),
@@ -291,6 +226,6 @@ class BoxTextField extends StatelessWidget {
 
 void main() {
   runApp(MaterialApp(
-    home: SignUpScreen(),
+    home: ResetPasswordPage(),
   ));
 }
