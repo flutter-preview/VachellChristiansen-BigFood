@@ -12,13 +12,15 @@ import 'Components/payment_screen.dart';
 import 'Components/setlocation_screen.dart';
 import 'Components/signupsuccess_screen.dart';
 import 'Components/successnotification_screen.dart';
+import 'Components/testfirestore_screen.dart';
 import 'Components/uploadphoto_screen.dart';
 import 'Components/signup_process_screen.dart';
 import 'Components/signup_screen.dart';
 import 'Components/verificationcode_screen.dart';
 import 'Components/viamethod_screen.dart';
 
-void main() async{
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
 );
@@ -55,6 +57,7 @@ class MyApp extends StatelessWidget {
         '/successnotif' : (context) => SuccessNotif(),
         '/signupsuccesspage' : (context) => SignUpSuccessPage(),
         '/setlocationpage' : (context) => SetLocationPage(),
+        '/firestore' : (context) => const TestFirestoreScreen(),
       },
     );
   }
