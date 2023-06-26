@@ -3,6 +3,8 @@ import 'package:duds/Components/resetpass_screen.dart';
 import 'package:duds/Components/testing_screen.dart';
 import 'package:duds/Components/loading_screen.dart';
 import 'package:duds/constants.dart';
+import 'package:duds/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'Components/login_screen.dart';
 import 'Components/onboarding_one_screen.dart';
@@ -16,7 +18,10 @@ import 'Components/signup_screen.dart';
 import 'Components/verificationcode_screen.dart';
 import 'Components/viamethod_screen.dart';
 
-void main() {
+void main() async{
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp(const MyApp());
 }
 

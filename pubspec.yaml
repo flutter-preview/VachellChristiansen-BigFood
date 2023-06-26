@@ -39,6 +39,7 @@ dependencies:
   # file_chooser: any
   file_selector: ^0.9.4
   dotted_border: ^2.0.0
+  firebase_core: ^2.14.0
 
 dev_dependencies:
   flutter_test:
