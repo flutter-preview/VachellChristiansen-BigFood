@@ -18,6 +18,7 @@ import 'Components/signup_process_screen.dart';
 import 'Components/signup_screen.dart';
 import 'Components/verificationcode_screen.dart';
 import 'Components/viamethod_screen.dart';
+import 'Components/home.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
         '/successnotif' : (context) => SuccessNotif(),
         '/signupsuccesspage' : (context) => SignUpSuccessPage(),
         '/setlocationpage' : (context) => SetLocationPage(),
+        '/homepage' : (context) => HomePage(),
         '/firestore' : (context) => const TestFirestoreScreen(),
       },
     );
