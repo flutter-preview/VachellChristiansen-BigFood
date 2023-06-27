@@ -1,78 +1,34 @@
 {
   "project_info": {
-    "project_number": "698169034813",
-    "firebase_url": "https://uas-softdev-default-rtdb.firebaseio.com",
-    "project_id": "uas-softdev",
-    "storage_bucket": "uas-softdev.appspot.com"
+    "project_number": "135003324088",
+    "project_id": "uasmobileprogramming-376c9",
+    "storage_bucket": "uasmobileprogramming-376c9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:698169034813:android:dd2f5d2e989d6fa71a0254",
-        "android_client_info": {
-          "package_name": "com.example.cekongkir"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "698169034813-1hhmhuel8gm363mv7u6v1v8t511a1v8f.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBFllKKtkLLSfqLDfdxOkNqlLM2avnFxNw"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "698169034813-1hhmhuel8gm363mv7u6v1v8t511a1v8f.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "698169034813-g85ruam9a54l7hqcklt79aruabu51nct.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.cekongkir.RunnerTests"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:698169034813:android:fb40549fd4e4ad081a0254",
+        "mobilesdk_app_id": "1:135003324088:android:b1c1519ea6892a4074fe4d",
         "android_client_info": {
           "package_name": "com.example.duds"
         }
       },
       "oauth_client": [
         {
-          "client_id": "698169034813-1hhmhuel8gm363mv7u6v1v8t511a1v8f.apps.googleusercontent.com",
+          "client_id": "135003324088-6l0riic9d03c5sgsrenoj7ajo8tv17mr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBFllKKtkLLSfqLDfdxOkNqlLM2avnFxNw"
+          "current_key": "AIzaSyC3U0Y1bVVXC1f54dTXC2poLBVC27ndTqg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "698169034813-1hhmhuel8gm363mv7u6v1v8t511a1v8f.apps.googleusercontent.com",
+              "client_id": "135003324088-6l0riic9d03c5sgsrenoj7ajo8tv17mr.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "698169034813-g85ruam9a54l7hqcklt79aruabu51nct.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.cekongkir.RunnerTests"
-              }
             }
           ]
         }
