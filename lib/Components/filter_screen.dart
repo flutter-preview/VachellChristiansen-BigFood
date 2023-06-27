@@ -40,10 +40,11 @@ class FilterScreen extends StatelessWidget {
                   Expanded(
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: "Search...",
+                        hintText: "Search For Food",
                         prefixIcon: Icon(Icons.search),
+                        suffixIcon: Icon(Icons.settings),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(15.0),
                         ),
                       ),
                     ),
@@ -54,7 +55,41 @@ class FilterScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20.0),
-            // Add more widgets here...
+            DropdownButton<String>(
+  value: 'Option 1',
+  onChanged: (String? newValue) {},
+  items: <String>['Option 1', 'Option 2', 'Option 3', 'Option 4']
+      .map<DropdownMenuItem<String>>((String value) {
+    return DropdownMenuItem<String>(
+      value: value,
+      child: Text(value),
+    );
+  }).toList(),
+),
+SizedBox(height: 10.0),
+DropdownButton<String>(
+  value: 'Option A',
+  onChanged: (String? newValue) {},
+  items: <String>['Option A', 'Option B', 'Option C', 'Option D']
+      .map<DropdownMenuItem<String>>((String value) {
+    return DropdownMenuItem<String>(
+      value: value,
+      child: Text(value),
+    );
+  }).toList(),
+),
+SizedBox(height: 10.0),
+DropdownButton<String>(
+  value: 'Option X',
+  onChanged: (String? newValue) {},
+  items: <String>['Option X', 'Option Y', 'Option Z']
+      .map<DropdownMenuItem<String>>((String value) {
+    return DropdownMenuItem<String>(
+      value: value,
+      child: Text(value),
+    );
+  }).toList(),
+),
           ],
         ),
       ),
