@@ -1,3 +1,4 @@
+import 'package:duds/Components/filter_screen.dart';
 import 'package:duds/Components/onboarding_two_screen.dart';
 import 'package:duds/Components/resetpass_screen.dart';
 import 'package:duds/Components/testing_screen.dart';
@@ -64,6 +65,7 @@ class MyApp extends StatelessWidget {
         '/firestore' : (context) => const TestFirestoreScreen(),
         '/profile1' : (context) => const ProfileScreen(),
         '/deleteaccount' : (context) => const DeleteAccount(),
+        '/filter' : (context) => FilterScreenPage(),
       },
     );
   }
