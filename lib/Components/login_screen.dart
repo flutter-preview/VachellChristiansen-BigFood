@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -6,7 +8,36 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  var db = FirebaseFirestore.instance;
   bool _showPassword = false;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void login() async {
+    final email = _emailController.text;
+    final password = _passwordController.text;
+
+    try {
+      final snapshot = await db
+          .collection('users')
+          .where('email', isEqualTo: email)
+          .where('password', isEqualTo: password)
+          .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        print('Login successful');
+        // Lakukan navigasi ke halaman berikutnya setelah login berhasil
+        // Misalnya, menggunakan Navigator.push untuk berpindah ke halaman utama aplikasi
+        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+      } else {
+        print('Invalid credentials');
+        // Tampilkan pesan kesalahan atau tindakan yang sesuai untuk login gagal
+      }
+    } catch (error) {
+      print('Error checking login: $error');
+      // Tampilkan pesan kesalahan atau tindakan yang sesuai jika terjadi kesalahan
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: BoxTextField(
                               hintText: 'Email',
                               prefixIcon: Icon(Icons.email),
+                              controller: _emailController,
                             ),
                           ),
                           SizedBox(height: 10.0),
@@ -76,6 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   hintText: 'Password',
                                   obscureText: !_showPassword,
                                   prefixIcon: Icon(Icons.lock),
+                                  controller: _passwordController,
                                 ),
                                 IconButton(
                                   icon: Icon(
@@ -97,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             alignment: Alignment.centerRight,
                             child: GestureDetector(
                               onTap: () {
-                                Navigator.pushNamed(context, '/viamethod');// Tambahkan logika untuk mengklik teks "Forgot Password" di sini
+                                Navigator.pushNamed(context, '/viamethod');
                               },
                               child: Text(
                                 'Forget Password?',
@@ -112,10 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/verification');
-                                // Tambahkan logika untuk tombol login di sini
-                              },
+                              onPressed: login,
                               child: Text(
                                 'Login',
                                 style: TextStyle(color: Colors.white),
@@ -164,14 +194,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: 10.0),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/signup');// Tambahkan logika untuk mengklik teks Register di sini
+                          Navigator.pushNamed(context, '/signup');
                         },
                         child: Text(
                           'REGISTER',
                           style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.bold,
-                            color: Color(int.parse('FF6440', radix: 16)).withOpacity(1.0),
+                            color:
+                                Color(int.parse('FF6440', radix: 16)).withOpacity(1.0),
                           ),
                         ),
                       ),
@@ -230,17 +261,20 @@ class BoxTextField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
   final Icon? prefixIcon;
+  final TextEditingController? controller;
 
   const BoxTextField({
     Key? key,
     required this.hintText,
     this.obscureText = false,
     this.prefixIcon,
+    this.controller,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       decoration: InputDecoration(
         hintText: hintText,
         contentPadding: EdgeInsets.symmetric(vertical: 16.0),

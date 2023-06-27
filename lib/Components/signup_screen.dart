@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+void main() {
+  runApp(MaterialApp(
+    home: SignUpScreen(),
+  ));
+}
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -8,6 +15,42 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   bool _showPassword = false;
   bool _showConfirmPassword = false;
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void registerUser() async {
+    final name = _nameController.text;
+    final email = _emailController.text;
+    final password = _passwordController.text;
+
+    try {
+      final snapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: email)
+          .get();
+
+      if (snapshot.docs.isEmpty) {
+        // User dengan email tersebut belum terdaftar, lanjutkan dengan registrasi
+        await FirebaseFirestore.instance.collection('users').add({
+          'name': name,
+          'email': email,
+          'password': password,
+        });
+        print('Registration successful');
+
+        // Lakukan navigasi ke halaman login setelah registrasi berhasil
+        Navigator.pushNamed(context, '/login');
+      } else {
+        print('Email already exists');
+        // Tampilkan pesan error atau lakukan tindakan yang sesuai untuk email yang sudah ada
+      }
+    } catch (error) {
+      print('Error registering user: $error');
+      // Tampilkan pesan error atau lakukan tindakan yang sesuai untuk error
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,12 +107,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           SizedBox(height: 25.0),
                           BoxWrapper(
                             child: BoxTextField(
+                              controller: _nameController,
                               hintText: 'Name',
-                              prefixIcon: Icon(Icons.email),
+                              prefixIcon: Icon(Icons.person),
                             ),
                           ),
                           BoxWrapper(
                             child: BoxTextField(
+                              controller: _emailController,
                               hintText: 'Email',
                               prefixIcon: Icon(Icons.email),
                             ),
@@ -79,6 +124,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               alignment: Alignment.centerRight,
                               children: [
                                 BoxTextField(
+                                  controller: _passwordController,
                                   hintText: 'Password',
                                   obscureText: !_showPassword,
                                   prefixIcon: Icon(Icons.lock),
@@ -98,118 +144,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ],
                             ),
                           ),
-                          BoxWrapper(
-                            child: Stack(
-                              alignment: Alignment.centerRight,
-                              children: [
-                                BoxTextField(
-                                  hintText: 'Confirm Password',
-                                  obscureText: !_showConfirmPassword,
-                                  prefixIcon: Icon(Icons.lock),
-                                ),
-                                IconButton(
-                                  icon: Icon(
-                                    _showConfirmPassword
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _showConfirmPassword =
-                                          !_showConfirmPassword;
-                                    });
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
                           SizedBox(height: 10.0),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, '/viamethod'); // Tambahkan logika untuk mengklik teks "Forgot Password" di sini
-                              },
-                              child: Text(
-                                'Forget Password?',
-                                style: TextStyle(
-                                  fontSize: 14.0,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 20.0),
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.pushNamed(
-                                    context, '/signup1'); // Tambahkan logika untuk tombol login di sini
-                              },
+                              onPressed: registerUser, // Panggil method registerUser saat tombol ditekan
                               child: Text(
                                 'Create Account',
                                 style: TextStyle(color: Colors.white),
                               ),
                               style: ElevatedButton.styleFrom(
-                                primary:
-                                    Color(int.parse('FF6440', radix: 16))
-                                        .withOpacity(1.0),
+                                primary: Color(int.parse('FF6440', radix: 16))
+                                    .withOpacity(1.0),
                                 minimumSize: Size(double.infinity, 48.0),
                               ),
                             ),
                           ),
-                          SizedBox(height: 20.0),
-                          Text(
-                            'or',
-                            style: TextStyle(fontSize: 16.0),
-                          ),
-                          SizedBox(height: 20.0),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CircleAvatar(
-                                backgroundColor: Colors.transparent,
-                                backgroundImage:
-                                    AssetImage('assets/facebookicon.png'),
-                              ),
-                              SizedBox(width: 10.0),
-                              CircleAvatar(
-                                backgroundColor: Colors.transparent,
-                                backgroundImage:
-                                    AssetImage('assets/googleicon.jpg'),
-                              ),
-                            ],
-                          ),
                         ],
                       ),
                     ),
-                  ),
-                  SizedBox(height: 30.0),
-                  Column(
-                    children: [
-                      Text(
-                        "Already have an account?",
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      SizedBox(height: 10.0),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context,
-                              '/'); // Tambahkan logika untuk mengklik teks Register di sini
-                        },
-                        child: Text(
-                          'Login',
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                            color: Color(int.parse('FF6440', radix: 16))
-                                .withOpacity(1.0),
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),
@@ -261,12 +214,14 @@ class BoxWrapper extends StatelessWidget {
 }
 
 class BoxTextField extends StatelessWidget {
+  final TextEditingController? controller;
   final String hintText;
   final bool obscureText;
   final Icon? prefixIcon;
 
   const BoxTextField({
     Key? key,
+    this.controller,
     required this.hintText,
     this.obscureText = false,
     this.prefixIcon,
@@ -275,6 +230,7 @@ class BoxTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       decoration: InputDecoration(
         hintText: hintText,
         contentPadding: EdgeInsets.symmetric(vertical: 16.0),
@@ -287,10 +243,4 @@ class BoxTextField extends StatelessWidget {
       obscureText: obscureText,
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: SignUpScreen(),
-  ));
 }
