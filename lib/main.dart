@@ -7,6 +7,7 @@ import 'package:duds/constants.dart';
 import 'package:duds/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'Components/deleteaccount_screen.dart';
 import 'Components/login_screen.dart';
 import 'Components/onboarding_one_screen.dart';
 import 'Components/payment_screen.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
         '/homepage' : (context) => HomePage(),
         '/firestore' : (context) => const TestFirestoreScreen(),
         '/profile1' : (context) => const ProfileScreen(),
+        '/deleteaccount' : (context) => const DeleteAccount(),
       },
     );
   }
