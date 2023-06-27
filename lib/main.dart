@@ -2,6 +2,7 @@ import 'package:duds/Components/onboarding_two_screen.dart';
 import 'package:duds/Components/resetpass_screen.dart';
 import 'package:duds/Components/testing_screen.dart';
 import 'package:duds/Components/loading_screen.dart';
+import 'package:duds/Components/uploadpreview_screen.dart';
 import 'package:duds/constants.dart';
 import 'package:duds/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
         '/signupsuccesspage' : (context) => SignUpSuccessPage(),
         '/setlocationpage' : (context) => SetLocationPage(),
         '/firestore' : (context) => const TestFirestoreScreen(),
+        '/profile1' : (context) => const ProfileScreen(),
       },
     );
   }

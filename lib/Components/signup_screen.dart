@@ -31,6 +31,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           .where('email', isEqualTo: email)
           .get();
 
+          
       if (snapshot.docs.isEmpty) {
         // User dengan email tersebut belum terdaftar, lanjutkan dengan registrasi
         await FirebaseFirestore.instance.collection('users').add({
@@ -38,6 +39,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           'email': email,
           'password': password,
         });
+        Navigator.pushReplacementNamed(context, '/login');
         print('Registration successful');
 
         // Lakukan navigasi ke halaman login setelah registrasi berhasil
