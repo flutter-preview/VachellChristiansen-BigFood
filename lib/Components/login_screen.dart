@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:duds/Components/home.dart';
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
         print('Login successful');
         // Lakukan navigasi ke halaman berikutnya setelah login berhasil
         // Misalnya, menggunakan Navigator.push untuk berpindah ke halaman utama aplikasi
-        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
       } else {
         print('Invalid credentials');
         // Tampilkan pesan kesalahan atau tindakan yang sesuai untuk login gagal
