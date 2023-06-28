@@ -11,8 +11,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int currentIndex=0;
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,7 +22,9 @@ class _HomePageState extends State<HomePage> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
-        body: CustomScrollView(
+        body: 
+      CustomScrollView(
+        
   slivers: <Widget>[
     const SliverAppBar(
       pinned: true,
@@ -410,38 +410,6 @@ SliverPadding(
 
   ],
 ),
-        bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Color.fromARGB(99, 255, 255, 255),
-        backgroundColor: const Color.fromARGB(255, 255, 100, 64),
-        currentIndex: currentIndex,
-        type : BottomNavigationBarType.fixed,
-        
-        onTap: (index) => setState(()=>currentIndex= index),
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: 'Checkout',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: 'Chat',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-   
-        
-
-      ),
-      
     ),
     
     );

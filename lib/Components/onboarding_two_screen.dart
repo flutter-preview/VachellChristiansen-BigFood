@@ -11,7 +11,7 @@ class OnboardingTwoScreen extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/bg-welcome.jpg'),
+            image: AssetImage('assets/bg-welcome2.jpg'),
             fit: BoxFit.cover,
           ),
         ),

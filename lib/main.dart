@@ -22,6 +22,7 @@ import 'Components/signup_screen.dart';
 import 'Components/verificationcode_screen.dart';
 import 'Components/viamethod_screen.dart';
 import 'Components/home.dart';
+import 'Components/homebar.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white
       ),
-      initialRoute: '/homepage',
+      initialRoute: '/',
       routes: {
         '/': (context) => const LoadingScreen(),
         '/welcome': (context) => const OnboardingOneScreen(),
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
         '/signupsuccesspage' : (context) => SignUpSuccessPage(),
         '/setlocationpage' : (context) => SetLocationPage(),
         '/homepage' : (context) => HomePage(),
+        '/homebar' : (context) => HomeBar(),
         '/firestore' : (context) => const TestFirestoreScreen(),
         '/profile1' : (context) => const ProfileScreen(),
         '/deleteaccount' : (context) => const DeleteAccount(),
