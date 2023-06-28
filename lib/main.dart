@@ -9,6 +9,7 @@ import 'package:duds/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'Components/deleteaccount_screen.dart';
+import 'Components/home1.dart';
 import 'Components/login_screen.dart';
 import 'Components/onboarding_one_screen.dart';
 import 'Components/payment_screen.dart';
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white
       ),
-      initialRoute: '/',
+      initialRoute: '/homepage1',
       routes: {
         '/': (context) => const LoadingScreen(),
         '/welcome': (context) => const OnboardingOneScreen(),
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
         '/signupsuccesspage' : (context) => SignUpSuccessPage(),
         '/setlocationpage' : (context) => SetLocationPage(),
         '/homepage' : (context) => HomePage(),
+        '/homepage1' : (context) => HomePage1(),
         '/homebar' : (context) => HomeBar(),
         '/firestore' : (context) => const TestFirestoreScreen(),
         '/profile1' : (context) => const ProfileScreen(),
