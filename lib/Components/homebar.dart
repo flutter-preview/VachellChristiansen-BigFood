@@ -25,6 +25,9 @@ ProfileScreen(),
     appBar: AppBar(
       elevation: 0,
       backgroundColor: Colors.transparent,
+        iconTheme: IconThemeData(
+    color: Colors.black,
+  ),
     ),
     body: screens[currentIndex],
     bottomNavigationBar: BottomNavigationBar(
@@ -33,7 +36,7 @@ ProfileScreen(),
         backgroundColor: const Color.fromARGB(255, 255, 100, 64),
         currentIndex: currentIndex,
         type : BottomNavigationBarType.fixed,
-        
+        showUnselectedLabels: false,
         onTap: (index) => setState(()=>currentIndex= index),
         items: [
           BottomNavigationBarItem(

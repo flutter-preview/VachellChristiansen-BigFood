@@ -22,7 +22,7 @@ class PaymentMethodPage extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor: Colors.transparent,
+      backgroundColor: const Color.fromARGB(0, 255, 255, 255),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

@@ -99,6 +99,7 @@ class ProfileScreen extends StatelessWidget {
                   title: Text('Payment Method'),
                   onTap: () {
                     // Action when Payment Method is clicked
+                      Navigator.pushNamed(context, '/payment');
                   },
                 ),
                 ListTile(
@@ -148,6 +149,7 @@ class ProfileScreen extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       // Action when Delete Account button is clicked
+                      Navigator.pushNamed(context, '/deleteaccount');
                     },
                     child: Container(
                       width: double.infinity,
