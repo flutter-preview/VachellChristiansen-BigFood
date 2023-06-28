@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:duds/Components/uploadpreview_screen.dart';
 
 void main() {
   runApp(HomePage());
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int currentIndex=0;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -402,12 +410,19 @@ SliverPadding(
 
   ],
 ),
-bottomNavigationBar: BottomNavigationBar(
+        bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Color.fromARGB(99, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 255, 100, 64),
+        currentIndex: currentIndex,
         type : BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
+        
+        onTap: (index) => setState(()=>currentIndex= index),
+        items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
+            
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
@@ -422,7 +437,11 @@ bottomNavigationBar: BottomNavigationBar(
             label: 'Profile',
           ),
         ],
+   
+        
+
       ),
+      
     ),
     
     );
