@@ -16,66 +16,42 @@ class HomePage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
-        body: Center(
-          child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
+        body: CustomScrollView(
+  slivers: <Widget>[
+    const SliverAppBar(
+      pinned: true,
+      expandedHeight: 250.0,
+      flexibleSpace: FlexibleSpaceBar(
+        title: Text('Find Your\nFavorite Food',
+        style: TextStyle(
+        fontFamily: 'Montserrat',
+        fontSize: 25,
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+      ),),
         
-              children: [
-                Expanded(
-                  child: Column(
-                
-                    children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Find Your Favourite Food!',
-
-                          style: TextStyle(
-                            fontSize: 24,
-                            color: Color(int.parse('FF6440', radix: 16))
-                                        .withOpacity(1.0),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 16),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Password Reset Successful',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 16.0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/successnotif');// Tambahkan logika untuk tombol login di sini
-                      },
-                      child: Text(
-                        'Login',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Color(int.parse('FF6440', radix: 16)).withOpacity(1.0),
-                        minimumSize: Size(double.infinity, 48.0),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+      ),
+    ),
+    SliverGrid(
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 200.0,
+        mainAxisSpacing: 10.0,
+        crossAxisSpacing: 10.0,
+        childAspectRatio: 4.0,
+      ),
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          return Container(
+            alignment: Alignment.center,
+            color: const Color.fromARGB(255,255, 238, 218),
+            child: Text('Grid Item $index'),
+          );
+        },
+        childCount: 20,
+      ),
+    ),
+  ],
+)
       ),
     );
   }
