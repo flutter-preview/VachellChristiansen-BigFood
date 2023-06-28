@@ -32,17 +32,55 @@ class HomePage extends StatelessWidget {
         
       ),
     ),
+SliverPadding(
+      padding: const EdgeInsets.all(20),
+      
+      sliver: SliverList(
+                  delegate: SliverChildListDelegate([
+                  
+                    Text(
+                      'Popular Menu',
+                      style: TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+              ),
+                    ),
+                  ]),
+                ),
+    ),
   SliverPadding(
       padding: const EdgeInsets.all(20),
+      
       sliver: SliverGrid.count(
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
         crossAxisCount: 2,
+      
         children: <Widget>[
           Container(
             padding: const EdgeInsets.all(8),
             color: const Color.fromARGB(255, 255, 238, 218),
-            child: const Text("He'd have you all unravel at the"),
+            child: Column(children: [
+                  Image.asset(
+                    'assets/zingerBurger.png',
+                    fit: BoxFit.contain,
+                  ),
+              Text("Zinger Burger",
+              style:TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
+              ),
+                            Text("Rp 20.000",
+              style:TextStyle(
+                      fontSize: 17.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 255, 100, 64),
+                    ),
+              ),
+
+            ],),
           ),
           Container(
             padding: const EdgeInsets.all(8),
@@ -72,6 +110,8 @@ class HomePage extends StatelessWidget {
         ],
       ),
     ),
+
+
   ],
 )
       ),
