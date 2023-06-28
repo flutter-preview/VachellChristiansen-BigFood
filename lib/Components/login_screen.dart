@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'assets/logo_w.png',
+                    'assets/BigFood.png',
                     width: 40.0,
                     height: 40.0,
                   ),

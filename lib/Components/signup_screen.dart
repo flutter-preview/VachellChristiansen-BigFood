@@ -73,7 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'assets/logo_w.png',
+                    'assets/BigFood.png',
                     width: 40.0,
                     height: 40.0,
                   ),
