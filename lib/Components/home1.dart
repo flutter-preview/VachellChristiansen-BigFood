@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../reusable component/Page1.dart';
-import '../reusable component/Page2.dart';
-import '../reusable component/Page3.dart';
-import '../reusable component/Page4.dart';
+import '../PagesOfHomePage/Page1.dart';
+import '../PagesOfHomePage/Page2.dart';
+import '../PagesOfHomePage/Page3.dart';
+import '../PagesOfHomePage/Page4.dart';
 
 void main() {
   runApp(HomePage1());
