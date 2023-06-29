@@ -39,11 +39,12 @@ class _LoginScreenState extends State<LoginScreen> {
         final userSnapshot =
             await db.collection('users').doc(user!.uid).get();
         final username = userSnapshot.get('username');
+        final email = userSnapshot.get('email');
 
         // Set the username in the userProvider
         final userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.setUsername(username);
-
+        userProvider.setEmail(email);
         // Proceed with navigation
         Navigator.pushReplacementNamed(context, '/homebar');
         print('Login successful');
