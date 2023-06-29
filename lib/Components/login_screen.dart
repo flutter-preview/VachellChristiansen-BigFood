@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:duds/Components/homebar.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -12,32 +13,29 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _showPassword = false;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   void login() async {
-    final email = _emailController.text;
-    final password = _passwordController.text;
+  final email = _emailController.text;
+  final password = _passwordController.text;
 
-    try {
-      final snapshot = await db
-          .collection('users')
-          .where('email', isEqualTo: email)
-          .where('password', isEqualTo: password)
-          .get();
+  try {
+    UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
 
-      if (snapshot.docs.isNotEmpty) {
-        print('Login successful');
-        // Lakukan navigasi ke halaman berikutnya setelah login berhasil
-        // Misalnya, menggunakan Navigator.push untuk berpindah ke halaman utama aplikasi
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBar()));
-      } else {
-        print('Invalid credentials');
-        // Tampilkan pesan kesalahan atau tindakan yang sesuai untuk login gagal
-      }
-    } catch (error) {
-      print('Error checking login: $error');
-      // Tampilkan pesan kesalahan atau tindakan yang sesuai jika terjadi kesalahan
+    if (userCredential.user != null) {
+      // Login berhasil, lakukan navigasi ke halaman beranda
+      Navigator.pushReplacementNamed(context, '/homebar');
+      print('Login successful');
     }
+  } catch (error) {
+    print('Error logging in: $error');
+    // Tampilkan pesan error atau lakukan tindakan yang sesuai untuk error
   }
+}
+
 
   @override
   Widget build(BuildContext context) {

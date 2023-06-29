@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -20,39 +21,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  void registerUser() async {
-    final name = _nameController.text;
+  void signUp() async {
     final email = _emailController.text;
     final password = _passwordController.text;
 
     try {
-      final snapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .where('email', isEqualTo: email)
-          .get();
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
 
-          
-      if (snapshot.docs.isEmpty) {
-        // User dengan email tersebut belum terdaftar, lanjutkan dengan registrasi
-        await FirebaseFirestore.instance.collection('users').add({
-          'name': name,
-          'email': email,
-          'password': password,
-        });
-        Navigator.pushReplacementNamed(context, '/login');
+      if (userCredential.user != null) {
+        // Registrasi berhasil, lakukan tindakan yang sesuai seperti menavigasi ke halaman beranda
         print('Registration successful');
-
-        // Lakukan navigasi ke halaman login setelah registrasi berhasil
-        Navigator.pushNamed(context, '/login');
-      } else {
-        print('Email already exists');
-        // Tampilkan pesan error atau lakukan tindakan yang sesuai untuk email yang sudah ada
       }
     } catch (error) {
-      print('Error registering user: $error');
+      print('Error signing up: $error');
       // Tampilkan pesan error atau lakukan tindakan yang sesuai untuk error
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +138,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                              onPressed: registerUser, // Panggil method registerUser saat tombol ditekan
+                              onPressed: signUp, // Panggil method registerUser saat tombol ditekan
                               child: Text(
                                 'Create Account',
                                 style: TextStyle(color: Colors.white),
