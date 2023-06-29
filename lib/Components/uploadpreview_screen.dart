@@ -1,95 +1,124 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ProfileScreen(),
-    );
-  }
+  _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key});
+class _ProfileScreenState extends State<ProfileScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  late User _user;
+  late String _email;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    _user = _auth.currentUser!;
+    final DocumentSnapshot userSnapshot =
+        await _firestore.collection('users').doc(_user.uid).get();
+
+    setState(() {
+      _email = _user.email!;
+    });
+  }
+
+  void _signOut() async {
+    await _auth.signOut();
+    Navigator.pop(context); // Kembali ke halaman sebelumnya setelah logout
+  }
+
+  void _deleteAccount() async {
+    // Tambahkan logika untuk menghapus akun pengguna di sini
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Text(
-              'Profile',
-              style: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Row(
-            children: [
-              SizedBox(width: 7.0),
-              CircleAvatar(
-                radius: 50,
-                backgroundImage: AssetImage('assets/logo.png'),
-              ),
-              SizedBox(width: 20.0),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          Container(
+            padding: EdgeInsets.all(16.0),
+            child: Stack(
+              children: [
+                Row(
                   children: [
-                    Text(
-                      'John Doe',
-                      style: TextStyle(fontSize: 18.0),
+                    CircleAvatar(
+                      radius: 60.0,
+                      backgroundImage: AssetImage('assets/profile_image.jpg'),
                     ),
-                    Text(
-                      'johndoe@example.com',
-                      style: TextStyle(fontSize: 18.0),
-                    ),
-                    Text(
-                      '1234567890',
-                      style: TextStyle(fontSize: 18.0),
+                    SizedBox(width: 16.0),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Oke',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Align(
+                          alignment: Alignment.centerLeft, // Tambahkan ini
+                          child: Text(
+                            _email,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18.0,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          'Nomor Telepon',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text('Edit Profile'),
-                        // Add your form or input fields here
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              // Perform save or update action
-                              Navigator.of(context).pop();
-                            },
-                            child: Text('Save'),
-                          ),
-                        ],
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: GestureDetector(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Edit Profile'),
+                            // Add your form or input fields here
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  // Perform save or update action
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('Save'),
+                              ),
+                            ],
+                          );
+                        },
                       );
                     },
-                  );
-                },
-                child: Row(
-                  children: [
-                    Icon(Icons.edit),
-                    SizedBox(width: 20.0),
-                  ],
+                    child: Icon(Icons.edit),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-          SizedBox(height: 40.0),
+          SizedBox(height: 16.0),
           Expanded(
             child: ListView(
               children: [
@@ -99,7 +128,7 @@ class ProfileScreen extends StatelessWidget {
                   title: Text('Payment Method'),
                   onTap: () {
                     // Action when Payment Method is clicked
-                      Navigator.pushNamed(context, '/payment');
+                    Navigator.pushNamed(context, '/payment');
                   },
                 ),
                 ListTile(
@@ -121,55 +150,30 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () {
-                      // Action when Log Out button is clicked
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.all(16.0),
-                      child: Text(
-                        'Log Out',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(int.parse('FF6440', radix: 16))
-                          .withOpacity(1.0),
-                      minimumSize: Size(double.infinity, 48.0),
-                    ),
+          Container(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                ElevatedButton(
+                  onPressed: _signOut,
+                  child: Text('Log Out'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.orange, // Warna oranye
+                    minimumSize: Size(double.infinity, 48.0),
                   ),
-                  SizedBox(height: 20.0),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Action when Delete Account button is clicked
-                      Navigator.pushNamed(context, '/deleteaccount');
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.all(16.0),
-                      child: Text(
-                        'Delete Account',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(int.parse('646464', radix: 16))
-                          .withOpacity(1.0),
-                      minimumSize: Size(double.infinity, 48.0),
-                    ),
+                ),
+                SizedBox(height: 16.0),
+                ElevatedButton(
+                  onPressed: _deleteAccount,
+                  child: Text('Delete Account'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey, // Warna abu-abu
+                    minimumSize: Size(double.infinity, 48.0),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          SizedBox(height: 1.0),
         ],
       ),
     );
