@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
+
+import '../UserData/user_provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -13,6 +16,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   late User _user;
   late String _email;
+  late String _username;
 
   @override
   void initState() {
@@ -21,14 +25,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _loadUserData() async {
-    _user = _auth.currentUser!;
-    final DocumentSnapshot userSnapshot =
-        await _firestore.collection('users').doc(_user.uid).get();
+  _user = _auth.currentUser!;
+  final DocumentSnapshot userSnapshot =
+      await _firestore.collection('users').doc(_user.uid).get();
 
-    setState(() {
-      _email = _user.email!;
-    });
+  if (userSnapshot.exists) {
+    final userData = userSnapshot.data() as Map<String, dynamic>;
+    if (userData.containsKey('username')) {
+      setState(() {
+        _username = userData['username'];
+      });
+    }
   }
+
+  setState(() {
+    _email = _user.email!;
+  });
+}
+
+
 
   void _signOut() async {
     await _auth.signOut();
@@ -41,6 +56,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final username = userProvider.getUsername();
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +77,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Oke',
+                          _username,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18.0,
@@ -86,32 +103,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ],
                 ),
                 Positioned(
-                  top: 70, // Atur posisi turun ikon edit di sini
-                  right: 0,
-                  child: GestureDetector(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text('Edit Profile'),
-                            // Add your form or input fields here
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  // Perform save or update action
-                                  Navigator.of(context).pop();
-                                },
-                                child: Text('Save'),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                    child: Icon(Icons.edit),
-                  ),
-                ),
+  top: 60, // Atur posisi turun ikon edit di sini
+  right: 0,
+  child: GestureDetector(
+    onTap: () {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Edit Profile'),
+            // Add your form or input fields here
+            actions: [
+              TextButton(
+                onPressed: () {
+                  // Perform save or update action
+                  Navigator.of(context).pop();
+                },
+                child: Text('Save'),
+              ),
+            ],
+          );
+        },
+      );
+    },
+    child: Icon(Icons.edit),
+  ),
+),
+
               ],
             ),
           ),

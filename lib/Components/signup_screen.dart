@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crypto/crypto.dart';
+import 'dart:convert';
 
 void main() {
   runApp(MaterialApp(
@@ -17,31 +19,41 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _showPassword = false;
   bool _showConfirmPassword = false;
 
-  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   void signUp() async {
+    final username = _usernameController.text;
     final email = _emailController.text;
     final password = _passwordController.text;
 
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      // Hash password using SHA-256
+      final hashedPassword = sha256.convert(utf8.encode(password)).toString();
+
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
-        password: password,
+        password: hashedPassword, // Use the hashed password
       );
 
       if (userCredential.user != null) {
-        // Registrasi berhasil, lakukan tindakan yang sesuai seperti menavigasi ke halaman beranda
+        // Save username to Firestore
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .set({'username': username});
+
+        // Registration successful, take appropriate action such as navigating to the home page
         Navigator.pushReplacementNamed(context, '/login');
         print('Registration successful');
       }
     } catch (error) {
       print('Error signing up: $error');
-      // Tampilkan pesan error atau lakukan tindakan yang sesuai untuk error
+      // Display error message or take appropriate action for the error
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +110,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           SizedBox(height: 25.0),
                           BoxWrapper(
                             child: BoxTextField(
-                              controller: _nameController,
+                              controller: _usernameController,
                               hintText: 'Name',
                               prefixIcon: Icon(Icons.person),
                             ),

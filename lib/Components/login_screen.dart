@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:duds/UserData/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:crypto/crypto.dart';
+
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -17,39 +21,47 @@ class _LoginScreenState extends State<LoginScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   void login(BuildContext context) async {
-    final email = _emailController.text;
-    final password = _passwordController.text;
+  final email = _emailController.text;
+  final password = hashPassword(_passwordController.text);
 
-    try {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+  try {
+    final userCredential =
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
 
-      if (userCredential.user != null) {
-        final user = _auth.currentUser;
-        final email = user?.email;
+    if (userCredential.user != null) {
+      final user = _auth.currentUser;
+      final email = user?.email;
 
-        if (email != null) {
-          await db.collection('users').doc(user!.uid).set({
-            'email': email,
-          });
+      if (email != null) {
+        final userSnapshot =
+            await db.collection('users').doc(user!.uid).get();
+        final username = userSnapshot.get('username');
 
-          print('Email saved to Firestore: $email');
-        }
-
-        // Login berhasil, lakukan navigasi ke halaman beranda
+        // Set the username in the userProvider
         final userProvider = Provider.of<UserProvider>(context, listen: false);
-        userProvider.setEmail(email!); // email adalah email yang login
+        userProvider.setUsername(username);
+
+        // Proceed with navigation
         Navigator.pushReplacementNamed(context, '/profile1');
         print('Login successful');
       }
-    } catch (error) {
-      print('Error logging in: $error');
-      // Tampilkan pesan error atau lakukan tindakan yang sesuai untuk error
     }
+  } catch (error) {
+    print('Error logging in: $error');
+    // Handle error
   }
+}
+
+
+String hashPassword(String password) {
+  final bytes = utf8.encode(password); // Konversi password ke bytes
+  final hash = sha256.convert(bytes); // Lakukan hashing menggunakan SHA-256
+  return hash.toString();
+}
+
 
   @override
   Widget build(BuildContext context) {
