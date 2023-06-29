@@ -27,6 +27,10 @@ class _HomePageState extends State<HomePage> {
             SliverAppBar(
               pinned: true,
               expandedHeight: 150.0,
+              bottom: PreferredSize(                       // Add this code
+                preferredSize: Size.fromHeight(30.0),      // Add this code
+                child: Text(''),                           // Add this code
+            ),
               flexibleSpace: FlexibleSpaceBar(
                 title: Text(
                   'Find Your\nFavorite Food',
