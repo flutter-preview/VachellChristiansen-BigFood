@@ -33,6 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
       if (userCredential.user != null) {
         // Registrasi berhasil, lakukan tindakan yang sesuai seperti menavigasi ke halaman beranda
+        Navigator.pushReplacementNamed(context, '/login');
         print('Registration successful');
       }
     } catch (error) {
