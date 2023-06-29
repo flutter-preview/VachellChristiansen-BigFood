@@ -22,12 +22,20 @@ ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) => Scaffold(
-    extendBodyBehindAppBar: true,
+    // extendBodyBehindAppBar: true,
     appBar: AppBar(
       elevation: 0,
-      backgroundColor: Colors.transparent,
+        title: Text('BigFood',
+        style: TextStyle(
+        fontFamily: 'Montserrat',
+        fontSize: 25,
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+      ),),
+      backgroundColor: Color.fromARGB(255, 255, 100, 64),
         iconTheme: IconThemeData(
     color: Colors.black,
+    
   ),
     ),
     body: screens[currentIndex],
