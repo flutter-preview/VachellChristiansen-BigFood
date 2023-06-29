@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
-
 import '../UserData/user_provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -53,43 +54,68 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       // Navigasi ke halaman login setelah menghapus akun
       Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
-      ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('User deleted successfully')),
-    );
+      showCustomSnackBar('User deleted successfully', Color(int.parse('FF6440', radix: 16))); // Panggil metode showCustomSnackBar dengan pesan dan warna yang diinginkan
     } catch (e) {
       // Tangani error saat menghapus akun
       print('Failed to delete account: $e');
       // Tampilkan pesan kesalahan kepada pengguna, misalnya menggunakan SnackBar
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to delete account. Please try again later.')),
-      );
+      showCustomSnackBar('Failed to delete account. Please try again later.', Colors.red); // Panggil metode showCustomSnackBar dengan pesan dan warna yang diinginkan
     }
   }
 
   void _showConfirmationDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Delete Account'),
-          content: Text('Are you sure you want to delete your account? This action cannot be undone.'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Tutup dialog konfirmasi
-              },
-              child: Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                _deleteAccount(); // Panggil method _deleteAccount() untuk menghapus akun
-                Navigator.of(context).pop(); // Tutup dialog konfirmasi
-              },
-              child: Text('Delete'),
-            ),
-          ],
-        );
-      },
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return FractionallySizedBox(
+        heightFactor: 0.5,
+        widthFactor: 0.8,
+        alignment: Alignment.center,
+        child: Align(
+          alignment: Alignment.center,
+          child: AlertDialog(
+            title: Text('Delete Account'),
+            content: Text('Are you sure you want to delete your account? This action cannot be undone.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Tutup dialog konfirmasi
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  _deleteAccount(); // Panggil method _deleteAccount() untuk menghapus akun
+                  Navigator.of(context).pop(); // Tutup dialog konfirmasi
+                },
+                child: Text('Delete'),
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
+
+
+  void showCustomSnackBar(String message, Color backgroundColor) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Container(
+          padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: Text(
+            message,
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        duration: Duration(seconds: 3),
+      ),
     );
   }
 
