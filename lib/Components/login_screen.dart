@@ -47,6 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
         userProvider.setEmail(email);
         // Proceed with navigation
         Navigator.pushReplacementNamed(context, '/homebar');
+        print('User $username logged in at ${DateTime.now()}');
         print('Login successful');
       }
     }

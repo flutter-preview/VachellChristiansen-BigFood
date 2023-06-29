@@ -44,7 +44,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _deleteAccount() async {
-    // Tambahkan logika untuk menghapus akun pengguna di sini
+    try {
+      // Hapus akun dari Firebase Authentication
+      await _user.delete();
+
+      // Hapus data pengguna dari Firestore
+      await _firestore.collection('users').doc(_user.uid).delete();
+
+      // Navigasi ke halaman login setelah menghapus akun
+      Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+      ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('User deleted successfully')),
+    );
+    } catch (e) {
+      // Tangani error saat menghapus akun
+      print('Failed to delete account: $e');
+      // Tampilkan pesan kesalahan kepada pengguna, misalnya menggunakan SnackBar
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to delete account. Please try again later.')),
+      );
+    }
+  }
+
+  void _showConfirmationDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Delete Account'),
+          content: Text('Are you sure you want to delete your account? This action cannot be undone.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Tutup dialog konfirmasi
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                _deleteAccount(); // Panggil method _deleteAccount() untuk menghapus akun
+                Navigator.of(context).pop(); // Tutup dialog konfirmasi
+              },
+              child: Text('Delete'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -174,7 +220,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     SizedBox(height: 16.0),
                     ElevatedButton(
-                      onPressed: _deleteAccount,
+                      onPressed: _showConfirmationDialog,
                       child: Text('Delete Account'),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.grey, // Warna abu-abu
