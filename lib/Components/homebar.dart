@@ -3,7 +3,6 @@ import 'package:duds/Components/orderdetails.dart';
 import 'package:flutter/material.dart';
 import 'package:duds/Components/uploadpreview_screen.dart';
 
-import '../PagesOfHomePage/Page2.dart';
 
 import 'package:duds/Components/chat.dart';
 void main() {
