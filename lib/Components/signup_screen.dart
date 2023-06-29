@@ -24,36 +24,41 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   void signUp() async {
-    final username = _usernameController.text;
-    final email = _emailController.text;
-    final password = _passwordController.text;
+  final username = _usernameController.text;
+  final email = _emailController.text;
+  final password = _passwordController.text;
 
-    try {
-      // Hash password using SHA-256
-      final hashedPassword = sha256.convert(utf8.encode(password)).toString();
+  try {
+    // Hash password using SHA-256
+    final hashedPassword = sha256.convert(utf8.encode(password)).toString();
 
-      UserCredential userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: hashedPassword, // Use the hashed password
-      );
+    UserCredential userCredential =
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: email,
+      password: hashedPassword, // Use the hashed password
+    );
 
-      if (userCredential.user != null) {
-        // Save username to Firestore
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(userCredential.user!.uid)
-            .set({'username': username});
+    if (userCredential.user != null) {
+      // Save username, email, and hashed password to Firestore
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set({
+        'username': username,
+        'email': email,
+        'hashedPassword': hashedPassword,
+      });
 
-        // Registration successful, take appropriate action such as navigating to the home page
-        Navigator.pushReplacementNamed(context, '/login');
-        print('Registration successful');
-      }
-    } catch (error) {
-      print('Error signing up: $error');
-      // Display error message or take appropriate action for the error
+      // Registration successful, take appropriate action such as navigating to the home page
+      Navigator.pushReplacementNamed(context, '/login');
+      print('Registration successful');
     }
+  } catch (error) {
+    print('Error signing up: $error');
+    // Display error message or take appropriate action for the error
   }
+}
+
 
   @override
   Widget build(BuildContext context) {

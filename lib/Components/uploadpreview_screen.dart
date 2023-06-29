@@ -36,12 +36,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _username = userData['username'];
       });
     }
+    if (userData.containsKey('email')) {
+      setState(() {
+        _email = userData['email'];
+      });
+    }
   }
-
-  setState(() {
-    _email = _user.email!;
-  });
 }
+
 
 
 
