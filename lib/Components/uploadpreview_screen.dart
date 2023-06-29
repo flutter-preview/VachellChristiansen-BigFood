@@ -67,14 +67,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                         SizedBox(height: 10),
-                        Align(
-                          alignment: Alignment.centerLeft, // Tambahkan ini
-                          child: Text(
-                            _email,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18.0,
-                            ),
+                        Text(
+                          _email,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
                           ),
                         ),
                         SizedBox(height: 10),
@@ -89,7 +86,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ],
                 ),
                 Positioned(
-                  top: 0,
+                  top: 70, // Atur posisi turun ikon edit di sini
                   right: 0,
                   child: GestureDetector(
                     onTap: () {
@@ -158,7 +155,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onPressed: _signOut,
                   child: Text('Log Out'),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.orange, // Warna oranye
+                    primary: Color(int.parse('FF6440', radix: 16)).withOpacity(1.0), // Warna oranye
                     minimumSize: Size(double.infinity, 48.0),
                   ),
                 ),
