@@ -2,6 +2,8 @@ import 'package:duds/Components/home.dart';
 import 'package:flutter/material.dart';
 import 'package:duds/Components/uploadpreview_screen.dart';
 
+import '../PagesOfHomePage/Page2.dart';
+
 void main() {
   runApp(HomeBar());
 }
@@ -15,7 +17,7 @@ class _HomeBarState extends State<HomeBar> {
   int currentIndex=0;
   final screens=[
 HomePage(),
-HomePage(),
+Page2(),
 HomePage(),
 ProfileScreen(),
   ];
