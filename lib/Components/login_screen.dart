@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
         userProvider.setUsername(username);
 
         // Proceed with navigation
-        Navigator.pushReplacementNamed(context, '/profile1');
+        Navigator.pushReplacementNamed(context, '/homebar');
         print('Login successful');
       }
     }
