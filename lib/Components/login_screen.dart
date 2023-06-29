@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:duds/UserData/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:duds/Components/homebar.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -15,27 +16,40 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  void login() async {
-  final email = _emailController.text;
-  final password = _passwordController.text;
+  void login(BuildContext context) async {
+    final email = _emailController.text;
+    final password = _passwordController.text;
 
-  try {
-    UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
 
-    if (userCredential.user != null) {
-      // Login berhasil, lakukan navigasi ke halaman beranda
-      Navigator.pushReplacementNamed(context, '/homebar');
-      print('Login successful');
+      if (userCredential.user != null) {
+        final user = _auth.currentUser;
+        final email = user?.email;
+
+        if (email != null) {
+          await db.collection('users').doc(user!.uid).set({
+            'email': email,
+          });
+
+          print('Email saved to Firestore: $email');
+        }
+
+        // Login berhasil, lakukan navigasi ke halaman beranda
+        final userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.setEmail(email!); // email adalah email yang login
+        Navigator.pushReplacementNamed(context, '/profile1');
+        print('Login successful');
+      }
+    } catch (error) {
+      print('Error logging in: $error');
+      // Tampilkan pesan error atau lakukan tindakan yang sesuai untuk error
     }
-  } catch (error) {
-    print('Error logging in: $error');
-    // Tampilkan pesan error atau lakukan tindakan yang sesuai untuk error
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -143,15 +157,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                              onPressed: login,
+                              onPressed: () => login(context), // Perbaikan di sini
                               child: Text(
                                 'Login',
                                 style: TextStyle(color: Colors.white),
                               ),
                               style: ElevatedButton.styleFrom(
-                                primary:
-                                    Color(int.parse('FF6440', radix: 16))
-                                        .withOpacity(1.0),
+                                primary: Color(int.parse('FF6440', radix: 16))
+                                    .withOpacity(1.0),
                                 minimumSize: Size(double.infinity, 48.0),
                               ),
                             ),
@@ -199,8 +212,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.bold,
-                            color:
-                                Color(int.parse('FF6440', radix: 16)).withOpacity(1.0),
+                            color: Color(int.parse('FF6440', radix: 16))
+                                .withOpacity(1.0),
                           ),
                         ),
                       ),
