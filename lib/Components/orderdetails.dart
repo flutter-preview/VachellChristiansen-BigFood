@@ -42,44 +42,58 @@ class OrderDetaill extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: Theme(
-                      data: ThemeData(
-                        primaryColor: Colors.grey,
-                        colorScheme: ColorScheme.light(primary: Colors.grey),
+                    child: TextField(
+                      style: TextStyle(
+                        color: Colors.white, // Set text color here
                       ),
-                      child: TextField(
-                        style: TextStyle(
-                          color: Colors.white, // Set text color here
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.grey[200], // Set background color here
+                        hintText: "Search For Food",
+                        hintStyle: TextStyle(
+                          color: Colors.grey, // Set hint text color here
                         ),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.grey[200], // Set background color here
-                          hintText: "Search For Food",
-                          hintStyle: TextStyle(
-                            color: Colors.grey, // Set hint text color here
-                          ),
-                          prefixIcon: Icon(Icons.search),
-                          suffixIcon: Icon(Icons.settings),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
+                        prefixIcon: Icon(Icons.search, color: Colors.grey), // Set the color of the search icon
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            // Add the functionality for the settings icon here
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => SettingsPage()),
+                            );
+                          },
+                          child: Icon(Icons.settings),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                          borderSide: BorderSide.none,
                         ),
                       ),
                     ),
                   ),
                   SizedBox(width: 10.0),
-                  Icon(Icons.notifications),
+                  GestureDetector(
+                          onTap: () {
+                            // Add the functionality for the settings icon here
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => SettingsPage()),
+                            );
+                          },
+                          child: Icon(Icons.notifications),
+                        ),
                 ],
               ),
             ),
             SizedBox(height: 20.0),
             DropdownButton<String>(
               value: 'Option 1                                                                                                                 ',
-              onChanged: (String? newValue) {},                          
+              onChanged: (String? newValue) {},
               items: <String>[
-                'Option 1                                                                                                                 ', 
-                'Option 2', 'Option 3', 'Option 4'
+                'Option 1                                                                                                                 ',
+                'Option 2',
+                'Option 3',
+                'Option 4'
               ].map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
@@ -92,10 +106,12 @@ class OrderDetaill extends StatelessWidget {
             ),
             DropdownButton<String>(
               value: 'Option 1                                                                                                                 ',
-              onChanged: (String? newValue) {},                          
+              onChanged: (String? newValue) {},
               items: <String>[
-                'Option 1                                                                                                                 ', 
-                'Option 2', 'Option 3', 'Option 4'
+                'Option 1                                                                                                                 ',
+                'Option 2',
+                'Option 3',
+                'Option 4'
               ].map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
@@ -103,15 +119,17 @@ class OrderDetaill extends StatelessWidget {
                 );
               }).toList(),
               style: TextStyle(color: Colors.black), // Text color
-              dropdownColor: Colors.grey[200], // Background color
+              dropdownColor: const Color.fromRGBO(238, 238, 238, 1), // Background color
               underline: Container(), // Remove default underline
             ),
             DropdownButton<String>(
               value: 'Option 1                                                                                                                 ',
-              onChanged: (String? newValue) {},                          
+              onChanged: (String? newValue) {},
               items: <String>[
-                'Option 1                                                                                                                 ', 
-                'Option 2', 'Option 3', 'Option 4'
+                'Option 1                                                                                                                 ',
+                'Option 2',
+                'Option 3',
+                'Option 4'
               ].map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
@@ -124,6 +142,20 @@ class OrderDetaill extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class SettingsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Settings"),
+      ),
+      body: Center(
+        child: Text("This is the Settings Page"),
       ),
     );
   }

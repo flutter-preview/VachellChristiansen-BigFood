@@ -22,101 +22,100 @@ class _HomePageState extends State<HomePage> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
-        body: 
-      CustomScrollView(
-        
-  slivers: <Widget>[
-    const SliverAppBar(
-      pinned: true,
-      expandedHeight: 150.0,
-      flexibleSpace: FlexibleSpaceBar(
-        title: Text('Find Your\nFavorite Food',
-        style: TextStyle(
-        fontFamily: 'Montserrat',
-        fontSize: 25,
-        fontWeight: FontWeight.bold,
-        color: Colors.black,
-      ),),
-        
-      ),
-    ),
-SliverPadding(
-      padding: const EdgeInsets.all(20),
-      
-      sliver: SliverList(
-                  delegate: SliverChildListDelegate([
-                  
-                    Text(
-                      'Popular Menu',
-                      style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-              ),
-                    ),
-                  ]),
+        body: CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+              pinned: true,
+              expandedHeight: 150.0,
+              flexibleSpace: FlexibleSpaceBar(
+                title: Text(
+                  'Find Your\nFavorite Food',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
-    ),
-  SliverPadding(
-      padding: const EdgeInsets.all(20),
-      
-      sliver: SliverGrid.count(
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        crossAxisCount: 2,
-      
-        children: <Widget>[
-          // Zinger Burger
-          Container(
-            padding: const EdgeInsets.all(8),
-            color: const Color.fromARGB(255, 255, 238, 218),
-            child: Column(children: [
-                  Image.asset(
-                    'assets/zingerBurger.png',
-                    fit: BoxFit.contain,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Text(
+                  'Popular Menu',
+                  style: TextStyle(
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
                   ),
-              Text("Zinger Burger",
-              style:TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    ),
+                ),
               ),
-                            Text("Rp 20.000",
-              style:TextStyle(
-                      fontSize: 15.0,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 255, 100, 64),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.all(20),
+              sliver: SliverGrid.count(
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 2,
+                children: <Widget>[
+                  // Zinger Burger
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    color: const Color.fromARGB(255, 255, 238, 218),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/zingerBurger.png',
+                          fit: BoxFit.contain,
+                        ),
+                        Text(
+                          "Zinger Burger",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 0, 0, 0),
+                          ),
+                        ),
+                        Text(
+                          "Rp 20.000",
+                          style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 255, 100, 64),
+                          ),
+                        ),
+                      ],
                     ),
-              ),
-
-            ],),
-          ),
-          // Roll Paratha
-          Container(
-            padding: const EdgeInsets.all(8),
-            color: const Color.fromARGB(255, 255, 238, 218),
-            child: Column(children: [
-                  Image.asset(
-                    'assets/rollParatha.png',
-                    fit: BoxFit.contain,
                   ),
-              Text("Roll Paratha",
-              style:TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 0, 0, 0),
+                  // Roll Paratha
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    color: const Color.fromARGB(255, 255, 238, 218),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/rollParatha.png',
+                          fit: BoxFit.contain,
+                        ),
+                        Text(
+                          "Roll Paratha",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 0, 0, 0),
+                          ),
+                        ),
+                        Text(
+                          "Rp 25.000",
+                          style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 255, 100, 64),
+                          ),
+                        ),
+                      ],
                     ),
-              ),
-                            Text("Rp 25.000",
-              style:TextStyle(
-                      fontSize: 15.0,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 255, 100, 64),
-                    ),
-              ),
-
-            ],),
-          ),
+                  ),
         Container(
             padding: const EdgeInsets.all(8),
             color: const Color.fromARGB(255, 255, 238, 218),
