@@ -31,18 +31,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   if (userSnapshot.exists) {
     final userData = userSnapshot.data() as Map<String, dynamic>;
-    if (userData.containsKey('username')) {
+    // if (userData.containsKey('username')) {
       setState(() {
         _username = userData['username'];
-      });
-    }
-    if (userData.containsKey('email')) {
-      setState(() {
+    //   });
+    // }
+    // if (userData.containsKey('email')) {
+      // setState(() {
         _email = userData['email'];
       });
     }
   }
-}
+// }
 
 
 
@@ -60,8 +60,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final username = userProvider.getUsername();
+    final email =  userProvider.getEmail();
     return Scaffold(
-      body: Column(
+      body: FutureBuilder(future: _loadUserData(), builder:(context, snapshot) {
+    return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
@@ -72,14 +74,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     CircleAvatar(
                       radius: 60.0,
-                      backgroundImage: AssetImage('assets/profile_image.jpg'),
+                      // backgroundColor: Colors.amber,
+                      backgroundImage: AssetImage('assets/bg-welcome.jpg'),
                     ),
                     SizedBox(width: 16.0),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          _username,
+                          username,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18.0,
@@ -87,10 +90,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         SizedBox(height: 10),
                         Text(
-                          _email,
+                          email,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18.0,
+                            // color: Colors.black,
                           ),
                         ),
                         SizedBox(height: 10),
@@ -192,7 +196,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
         ],
-      ),
-    );
+      );  
+      }, 
+
+      
+    ));
   }
 }

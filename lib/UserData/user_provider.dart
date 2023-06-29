@@ -20,4 +20,7 @@ class UserProvider with ChangeNotifier {
   String getUsername() {
     return _username;
   }
+  String getEmail() {
+    return _email;
+  }
 }
