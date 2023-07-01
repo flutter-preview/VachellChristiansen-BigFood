@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import '../UserData/user_provider.dart';
+import 'package:provider/provider.dart';
+
+
 
 class ResetPasswordPage extends StatefulWidget {
   @override
@@ -225,7 +229,13 @@ class BoxTextField extends StatelessWidget {
 }
 
 void main() {
-  runApp(MaterialApp(
-    home: ResetPasswordPage(),
-  ));
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => UserProvider(),
+      child: MaterialApp(
+        home: ResetPasswordPage(),
+      ),
+    ),
+  );
 }
+

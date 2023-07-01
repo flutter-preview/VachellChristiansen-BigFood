@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'user_provider.dart';
+
 
 class UserProvider with ChangeNotifier {
   String _email = '';
