@@ -22,43 +22,56 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
 
   void signUp() async {
-  final username = _usernameController.text;
-  final email = _emailController.text;
-  final password = _passwordController.text;
+    final username = _usernameController.text;
+    final email = _emailController.text;
+    final password = _passwordController.text;
+    final confirmPassword = _confirmPasswordController.text;
 
-  try {
-    // Hash password using SHA-256
-    final hashedPassword = sha256.convert(utf8.encode(password)).toString();
-
-    UserCredential userCredential =
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: email,
-      password: hashedPassword, // Use the hashed password
-    );
-
-    if (userCredential.user != null) {
-      // Save username, email, and hashed password to Firestore
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(userCredential.user!.uid)
-          .set({
-        'username': username,
-        'email': email,
-        'hashedPassword': hashedPassword,
-      });
-
-      // Registration successful, take appropriate action such as navigating to the home page
-      Navigator.pushReplacementNamed(context, '/login');
-      print('Registration successful');
+    if (username.isEmpty || email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+    print('Please fill in all fields');
+    // Display error message or take appropriate action for empty fields
+    return;
     }
-  } catch (error) {
-    print('Error signing up: $error');
-    // Display error message or take appropriate action for the error
-  }
-}
+    
+    if (password != confirmPassword) {
+      print('Passwords do not match');
+      // Display error message or take appropriate action for password mismatch
+      return;
+    }
 
+    try {
+      // Hash password using SHA-256
+      final hashedPassword = sha256.convert(utf8.encode(password)).toString();
+
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: hashedPassword, // Use the hashed password
+      );
+
+      if (userCredential.user != null) {
+        // Save username, email, and hashed password to Firestore
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .set({
+          'username': username,
+          'email': email,
+          'hashedPassword': hashedPassword,
+        });
+
+        // Registration successful, take appropriate action such as navigating to the home page
+        Navigator.pushReplacementNamed(context, '/login');
+        print('Registration successful');
+      }
+    } catch (error) {
+      print('Error signing up: $error');
+      // Display error message or take appropriate action for the error
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -146,6 +159,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   onPressed: () {
                                     setState(() {
                                       _showPassword = !_showPassword;
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          BoxWrapper(
+                            child: Stack(
+                              alignment: Alignment.centerRight,
+                              children: [
+                                BoxTextField(
+                                  controller: _confirmPasswordController,
+                                  hintText: 'Confirm Password',
+                                  obscureText: !_showConfirmPassword,
+                                  prefixIcon: Icon(Icons.lock),
+                                ),
+                                IconButton(
+                                  icon: Icon(
+                                    _showConfirmPassword
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _showConfirmPassword = !_showConfirmPassword;
                                     });
                                   },
                                 ),
