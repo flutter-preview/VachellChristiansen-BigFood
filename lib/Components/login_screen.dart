@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:crypto/crypto.dart';
+import 'package:flutter/widgets.dart';
 
 
 class LoginScreen extends StatefulWidget {
@@ -23,6 +24,11 @@ class _LoginScreenState extends State<LoginScreen> {
   void login(BuildContext context) async {
   final email = _emailController.text;
   final password = hashPassword(_passwordController.text);
+
+  if (email.isEmpty || password.isEmpty) {
+    print('Please fill in all fields');
+    return;
+  }
 
   try {
     final userCredential =
@@ -172,7 +178,7 @@ String hashPassword(String password) {
                             width: double.infinity,
                             child: ElevatedButton(
                             onPressed: () {
-                             Navigator.pushNamed(context, '/homebar');
+                              login(context);
                               },
                               child: Text(
                                 'Login',
