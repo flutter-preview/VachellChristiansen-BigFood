@@ -18,12 +18,67 @@ class ResetPasswordPage extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
+Future<void> sendPasswordResetEmail(String email) async {
+  try {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    print('Password reset email sent successfully.');
+  } catch (e) {
+    print('Error sending password reset email: $e');
+  }
+}
+
 class _LoginScreenState extends State<ResetPasswordPage> {
   bool _showPassword = false;
   var db = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
     final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  Future<void> resetPassword() async {
+    try {
+      final email = _emailController.text;
+      final password = hashPassword(_passwordController.text);
+      await _auth.sendPasswordResetEmail(email: email);
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Success'),
+            content: Text('Password reset email has been sent.'),
+            actions: [
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } catch (e) {
+      print('Error resetting password: $e');
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text('Failed to reset password. Please try again.'),
+            actions: [
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -125,7 +180,7 @@ class _LoginScreenState extends State<ResetPasswordPage> {
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/verification');// Tambahkan logika untuk tombol login di sini
+                                resetPassword();// Tambahkan logika untuk tombol login di sini
                               },
                               child: Text(
                                 'Continue',
