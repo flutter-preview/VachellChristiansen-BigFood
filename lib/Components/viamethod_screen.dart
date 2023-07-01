@@ -95,7 +95,7 @@ class ViaMethodScreen extends StatelessWidget {
                               alignment: Alignment.centerLeft,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  // Logic for Email button
+                                  Navigator.pushNamed(context, '/resetpass');
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: Color.fromARGB(255, 192, 192, 192),

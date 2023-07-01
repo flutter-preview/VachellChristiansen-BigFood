@@ -1,8 +1,17 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crypto/crypto.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../UserData/user_provider.dart';
 import 'package:provider/provider.dart';
 
-
+String hashPassword(String password) {
+  final bytes = utf8.encode(password); // Konversi password ke bytes
+  final hash = sha256.convert(bytes); // Lakukan hashing menggunakan SHA-256
+  return hash.toString();
+}
 
 class ResetPasswordPage extends StatefulWidget {
   @override
@@ -11,7 +20,11 @@ class ResetPasswordPage extends StatefulWidget {
 
 class _LoginScreenState extends State<ResetPasswordPage> {
   bool _showPassword = false;
-
+  var db = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+    final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,30 +85,12 @@ class _LoginScreenState extends State<ResetPasswordPage> {
                             style: TextStyle(
                               fontSize: 15.0,
                             ),
-                          ),
-                          SizedBox(height: 25.0),
+                          ), SizedBox(height:25),
                           BoxWrapper(
-                            child: Stack(
-                              alignment: Alignment.centerRight,
-                              children: [
-                                BoxTextField(
-                                  hintText: 'Password',
-                                  obscureText: !_showPassword,
-                                  prefixIcon: Icon(Icons.lock),
-                                ),
-                                IconButton(
-                                  icon: Icon(
-                                    _showPassword
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _showPassword = !_showPassword;
-                                    });
-                                  },
-                                ),
-                              ],
+                            child: BoxTextField(
+                              controller: _emailController,
+                              hintText: 'Email',
+                              prefixIcon: Icon(Icons.email),
                             ),
                           ),
                           BoxWrapper(
@@ -103,7 +98,8 @@ class _LoginScreenState extends State<ResetPasswordPage> {
                               alignment: Alignment.centerRight,
                               children: [
                                 BoxTextField(
-                                  hintText: 'Confirm Password',
+                                  controller: _passwordController,
+                                  hintText: 'Password',
                                   obscureText: !_showPassword,
                                   prefixIcon: Icon(Icons.lock),
                                 ),
@@ -203,17 +199,20 @@ class BoxTextField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
   final Icon? prefixIcon;
+  final TextEditingController? controller;
 
   const BoxTextField({
     Key? key,
     required this.hintText,
     this.obscureText = false,
     this.prefixIcon,
+    this.controller,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller:controller,
       decoration: InputDecoration(
         hintText: hintText,
         contentPadding: EdgeInsets.symmetric(vertical: 16.0),
