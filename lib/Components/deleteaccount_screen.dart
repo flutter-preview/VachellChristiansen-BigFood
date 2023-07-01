@@ -52,7 +52,7 @@ class DeleteAccount extends StatelessWidget {
   padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 100.0),
   child: InkWell(
     onTap: () {
-      // Action when "YES" text is clicked
+      Navigator.pushNamed(context, '/welcome');
     },
     child: Ink(
       decoration: BoxDecoration(

@@ -171,7 +171,9 @@ String hashPassword(String password) {
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                              onPressed: () => login(context), // Perbaikan di sini
+                            onPressed: () {
+                             Navigator.pushNamed(context, '/homebar');
+                              },
                               child: Text(
                                 'Login',
                                 style: TextStyle(color: Colors.white),

@@ -65,7 +65,7 @@ ProfileScreen(),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Profile',
+            label: 'ProfilePage',
           ),
         ],
    

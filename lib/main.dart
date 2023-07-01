@@ -1,5 +1,7 @@
+import 'package:duds/Components/chat.dart';
 import 'package:duds/Components/filter_screen.dart';
 import 'package:duds/Components/onboarding_two_screen.dart';
+import 'package:duds/Components/profilepage.dart';
 import 'package:duds/Components/resetpass_screen.dart';
 import 'package:duds/Components/testing_screen.dart';
 import 'package:duds/Components/loading_screen.dart';
@@ -76,6 +78,8 @@ class MyApp extends StatelessWidget {
         '/profile1' : (context) =>  ProfileScreen(),
         '/deleteaccount' : (context) => const DeleteAccount(),
         '/filter' : (context) => FilterScreenPage(),
+        '/chat' : (context) => Chat(),
+        '/profilepage' : (context) => ProfilePage(),
       },
     );
   }

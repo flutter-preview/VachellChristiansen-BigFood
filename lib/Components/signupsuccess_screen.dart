@@ -58,15 +58,15 @@ class SignUpSuccessPage extends StatelessWidget {
                     padding: EdgeInsets.only(bottom: 16.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        // Tambahkan logika untuk tombol login di sini
+                        Navigator.pushNamed(context, '/homepage');
                       },
-                      child: Text(
+                      style: ElevatedButton.styleFrom(
+                      primary: Color(int.parse('FF6440', radix: 16)).withOpacity(1.0),
+                      padding: EdgeInsets.symmetric(vertical: 16.0),
+                      ),
+                      child: const Text(
                         'Try Order',
                         style: TextStyle(color: Colors.white),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Color(int.parse('FF6440', radix: 16)).withOpacity(1.0),
-                        minimumSize: Size(double.infinity, 48.0),
                       ),
                     ),
                   ),
