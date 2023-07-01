@@ -8,9 +8,14 @@ import '../UserData/user_provider.dart';
 import 'package:provider/provider.dart';
 
 String hashPassword(String password) {
-  final bytes = utf8.encode(password); // Konversi password ke bytes
-  final hash = sha256.convert(bytes); // Lakukan hashing menggunakan SHA-256
+  final bytes = utf8.encode(password); // Convert password to bytes
+  final hash = sha256.convert(bytes); // Perform hashing using SHA-256
   return hash.toString();
+}
+
+bool verifyPassword(String enteredPassword, String storedPassword) {
+  final enteredPasswordHash = hashPassword(enteredPassword);
+  return enteredPasswordHash == storedPassword;
 }
 
 class ResetPasswordPage extends StatefulWidget {
@@ -31,41 +36,93 @@ class _LoginScreenState extends State<ResetPasswordPage> {
   bool _showPassword = false;
   var db = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-    final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   Future<void> resetPassword() async {
-    try {
-      final email = _emailController.text;
-      final password = hashPassword(_passwordController.text);
-      await _auth.sendPasswordResetEmail(email: email);
+    
+    final email = _emailController.text;
+    final password = hashPassword(_passwordController.text);
 
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Success'),
-            content: Text('Password reset email has been sent.'),
-            actions: [
-              TextButton(
-                child: Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
+    final QuerySnapshot snapshot = await db
+        .collection('users')
+        .where('email', isEqualTo: email)
+        .limit(1)
+        .get();
+        
+
+    if (snapshot.docs.isNotEmpty) {
+      final snapshotData = snapshot.docs[0].data() as Map<String, dynamic>;
+final storedPassword = snapshotData['hashedPassword'] as String;
+
+      if (snapshotData['hashedPassword'] == password) {
+        print(snapshotData['hashedPassword']);
+        print(password);
+        try {
+          await sendPasswordResetEmail(email);
+
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Success'),
+                content: Text('Password reset email has been sent.'),
+                actions: [
+                  TextButton(
+                    child: Text('OK'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
           );
-        },
-      );
-    } catch (e) {
-      print('Error resetting password: $e');
-
+        } catch (e) {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Error'),
+                content: Text('Failed to reset password. Please try again.'),
+                actions: [
+                  TextButton(
+                    child: Text('OK'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        }
+      } else {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Error'),
+              content: Text('Incorrect password. Please try again.'),
+              actions: [
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } else {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Error'),
-            content: Text('Failed to reset password. Please try again.'),
+            content: Text('User not found. Please try again.'),
             actions: [
               TextButton(
                 child: Text('OK'),
@@ -79,7 +136,7 @@ class _LoginScreenState extends State<ResetPasswordPage> {
       );
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,12 +179,12 @@ class _LoginScreenState extends State<ResetPasswordPage> {
                   SizedBox(height: 20.0),
                   CardBox(
                     child: Container(
-                      width: 300.0, // Ubah lebar CardBox sesuai kebutuhan
+                      width: 300.0, // Adjust CardBox width as needed
                       child: Column(
                         children: [
                           Text(
+                            'Reset your password here',
                             textAlign: TextAlign.center,
-                            'Reset your password \here',
                             style: TextStyle(
                               fontSize: 28.0,
                               fontWeight: FontWeight.bold,
@@ -135,12 +192,13 @@ class _LoginScreenState extends State<ResetPasswordPage> {
                           ),
                           SizedBox(height: 15.0),
                           Text(
-                            textAlign: TextAlign.center,
                             'Enter your new password and then confirm new password',
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 15.0,
                             ),
-                          ), SizedBox(height:25),
+                          ),
+                          SizedBox(height: 25),
                           BoxWrapper(
                             child: BoxTextField(
                               controller: _emailController,
@@ -180,16 +238,15 @@ class _LoginScreenState extends State<ResetPasswordPage> {
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () {
-                                resetPassword();// Tambahkan logika untuk tombol login di sini
+                                resetPassword();
                               },
                               child: Text(
                                 'Continue',
                                 style: TextStyle(color: Colors.white),
                               ),
                               style: ElevatedButton.styleFrom(
-                                primary:
-                                    Color(int.parse('FF6440', radix: 16))
-                                        .withOpacity(1.0),
+                                primary: Color(int.parse('FF6440', radix: 16))
+                                    .withOpacity(1.0),
                                 minimumSize: Size(double.infinity, 48.0),
                               ),
                             ),
@@ -200,7 +257,6 @@ class _LoginScreenState extends State<ResetPasswordPage> {
                     ),
                   ),
                   SizedBox(height: 30.0),
-                  
                 ],
               ),
             ),
@@ -267,7 +323,7 @@ class BoxTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller:controller,
+      controller: controller,
       decoration: InputDecoration(
         hintText: hintText,
         contentPadding: EdgeInsets.symmetric(vertical: 16.0),
@@ -292,4 +348,3 @@ void main() {
     ),
   );
 }
-
